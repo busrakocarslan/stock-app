@@ -36,9 +36,14 @@
 //?ilk  ders çok öenmli ayrıntılı not al!!!!!!!!!!!!!!!!
 // güvenlikli api larda tokan kullanıldığında logout da normalde token kullanılıyor bizde öyle yaptık.
 
+//*ikinci ders logout yöntemi
+// güvenlikli apilarda token isteği muıtlaka kullanılır be bize burada logout u get isteği olarak ayarlamış ancak normalde post isteği olur ve token gerekir bu yüzden ona göre ayarladık. 
+
 
 // sürekli get post işlememi yapmamk için her işlemde de şifre işlmeleri uzun süreceğinden 
 //"5807ebba34d21ced65a0d991e0a5ce71f18cff2adb65d2aec9752525fad1c338
 //!axios İNsTaNCE 
 // axiosu kullanmamızı basitleştiren bir yöntem servise klasörünün altında yeni bir file açıp 
+// const instance=axios.create({baseUrl:"",timeout:"",headers:""}) şeklinde bir yapı bu get post gibi bir işlem değil axiosun içinde oln bir yöntem instance bu bize bütün configleri(çalışma hali) verilmiş bir instance veriyor, adına instance dışında da bir şey verilebilir.bunu ör şöyle çağoralacak instance.get instance.post gibi sadece devamındaki endpoint eklenecek
+
 

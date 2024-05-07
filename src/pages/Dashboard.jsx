@@ -79,12 +79,12 @@ function Dashboard(props) {
             variant="h6"
             noWrap
             component="div"
-            sx={{ flexGrow: 1 }}
+            sx={{ flexGrow: 1 }}// sağa dayamak için verdiğim style büyüme oranı default 'u 0 dır
           >
             Stock App
           </Typography>
           {user && (
-            <Button color="error"  onClick={logout}>
+            <Button color="error" sx={{":hover":{color:"white"}}}  onClick={logout}>
               Logout
               <LogoutIcon/>
             </Button>
@@ -141,7 +141,7 @@ function Dashboard(props) {
         }}
       >
         <Toolbar />
-        <Outlet />
+        <Outlet />{/*hangi route gelirse dashboardın altındaki o burada açılacak */}
       </Box>
     </Box>
   );

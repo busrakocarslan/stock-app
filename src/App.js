@@ -6,6 +6,7 @@ import {
   lightGreen,
   deepOrange,
   purple,
+  blueGrey,
 } from "@mui/material/colors";
 import { Provider } from "react-redux";
 import store from "./app/store";
@@ -15,7 +16,7 @@ function App() {
   const theme = createTheme({
     palette: {
       primary: {
-        main: teal["800"],
+        main: blueGrey["700"],
       },
       secondary: {
         main: amber["800"],

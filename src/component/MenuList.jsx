@@ -43,7 +43,7 @@ const MenuList = () => {
     {
       title: "Products",
       iconName: <Inventory2TwoToneIcon />,
-      path: "/stock/products/",
+      path: "/stock/products/",// onclik özelliğiniz map ile döndüğümüz yere yadığımızdan verilen adrese gidyor. Absolutepath olduğundan heryerden gidiyor.
     },
   ];
 
@@ -53,7 +53,7 @@ const MenuList = () => {
         {icons.map((item, index) => (
           <ListItem
             key={index}
-            disablePadding
+            disablePadding// listıtemıcon listıtemtext gibi bileşenlerin etrafındaki pDDİNGİ KONTROL EDER.
             onClick={() => navigate(item.path)}
           >
             <ListItemButton

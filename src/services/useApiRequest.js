@@ -1,5 +1,5 @@
 // amaç api isteklerini tek yerden atmak
-import axios from "axios";
+// import axios from "axios";
 import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify";
 import {
   fetchFail,
@@ -8,22 +8,27 @@ import {
   logoutSuccess,
   registerSuccess,
 } from "../features/authSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import React from "react";
+import useAxios from "./useAxios";
 
 const useApiRequest = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { token }=useSelector(state=>state.auth.token)
+  // const { token } = useSelector((state) => state.auth.token);
+  const { axiosToken, axiosPublic } = useAxios();
   const login = async (userData) => {
+    //   const BASE_URL = "https://10001.fullstack.clarusway.com"
+
     dispatch(fetchStart());
     try {
-      const { data } = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/auth/login`,
-        userData
-      );
+      // const { data } = await axios.post(
+      //   `${process.env.REACT_APP_BASE_URL}/auth/login`,
+      //   userData
+      // )
+      const { data } = await axiosPublic.post("/auth/login/", userData);
       dispatch(loginSuccess(data));
       toastSuccessNotify("Login işlemi başarılı");
       navigate("/stock");
@@ -33,32 +38,11 @@ const useApiRequest = () => {
       console.log(error);
     }
   };
-  // const login = async (userData) => {
-  //   dispatch(fetchStart()); //slice kısmında oluşturduğumuz ilk pending işlemine ait reducer aysnctunk yerine kendimiz yazıyoruz dispatcler ile
 
-  //   // const BASE_URL= "https://19136.fullstack.clarusway.com"
-  //   // nasıl istek yapacağını api in kullanım yerinden öğreniyorsun swagger yerinden öğreniyorsun
-  //   try {
-  //     const { data } = await axios.post(
-  //       `${process.env.BASE_URL}/auth/login`,
-  //       userData
-  //     ); // buradaki bu userdata yı fonk başında 7. sırada parametre olarak verdiğimiz yerden alıyoruz.
-  //     dispatch(loginSuccess(data)); // istediği veri datada
-  //     toastSuccessNotify("LOGİN İŞLEMİ BAŞARILI");
-  //     navigate("/stock");
-  //   } catch (error) {
-  //     dispatch(fetchFail());
-  //     toastErrorNotify("LOGİN BAŞARISIZ OLDU");
-  //     console.log(error);
-  //   }
-  // };
   const register = async (userData) => {
     dispatch(fetchStart());
     try {
-      const { data } = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/users`,
-        userData
-      );
+      const { data } = await axiosPublic.post("users", userData);
       dispatch(registerSuccess(data));
       toastSuccessNotify("Kayıt işlemi başarılı");
       navigate("/");
@@ -71,7 +55,8 @@ const useApiRequest = () => {
   const logout = async () => {
     dispatch(fetchStart());
     try {
-      await axios(`${process.env.REACT_APP_BASE_URL}/auth/logout`, {headers:{Authorization:`Token ${token}`}});
+      await axiosToken("/auth/logout");
+      // await axios(`${process.env.REACT_APP_BASE_URL}/auth/logout`, {headers:{Authorization:`Token ${token}`}});// Be tarafında token silinerek verilerimizin silinmesi için bu işlem yapıldı. Token bilgisini de useSelector ile globaldeki veriden çektim.
       dispatch(logoutSuccess());
       toastSuccessNotify("Logout işlemi başarılı");
       navigate("/");
