@@ -30,3 +30,15 @@
 //1- öncelikle slicesimizi oluşturmalıyız nelere globalda ihtiyacımız var onu yazmalıyız. en öenmlisi token bilgisi bu passwordu saklayıp sonraki her işlemimizde bu token ı kullanmalıyız. 
 ///TODO__ bu workarounda çok öenmli bir hata var dispatch kullanmaya çalışıyoruz o bir costom hook ama biz bu halde normal func kullanıyoruz o yüzden hata alıyoruz. ya comp içinde ya da costom hook içinde kullanmalıyız. bu hatadan kurtulmak için use ile costom hook haline çeviriyoruz!!!
 //?costom hook içinde js döndürmeyen ve içinde react hooklarını kullanabileceğin özel bir fonk yapısıdır.bir kere yazarsın her yerde kullanırısın compo gibi. 
+//! ------------------------------------------------------------------
+//! --------------------------6/5/2024 ikinci gün ---------------------------
+//! ------------------------------------------------------------------
+//?ilk  ders çok öenmli ayrıntılı not al!!!!!!!!!!!!!!!!
+// güvenlikli api larda tokan kullanıldığında logout da normalde token kullanılıyor bizde öyle yaptık.
+
+
+// sürekli get post işlememi yapmamk için her işlemde de şifre işlmeleri uzun süreceğinden 
+//"5807ebba34d21ced65a0d991e0a5ce71f18cff2adb65d2aec9752525fad1c338
+//!axios İNsTaNCE 
+// axiosu kullanmamızı basitleştiren bir yöntem servise klasörünün altında yeni bir file açıp 
+

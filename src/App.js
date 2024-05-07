@@ -28,6 +28,16 @@ function App() {
       },
       info: {
         main: purple["500"],
+      },      
+    },
+    overrides: {
+      MuiListItem: {
+        root: {
+          '&:hover': {
+            backgroundColor: 'white',
+            color: 'blue', // Metin rengi
+          },
+        },
       },
     },
   });
@@ -44,3 +54,6 @@ function App() {
 }
 
 export default App;
+
+  
+  
