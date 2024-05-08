@@ -4,6 +4,8 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { TextField } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { addFirm } from "../features/firmSlice";
 
 const style = {
   position: "absolute",
@@ -23,6 +25,12 @@ const FirmsModal = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const dispatch=useDispatch()
+  const handleAddFirm=()=>{
+    dispatch(addFirm())
+    handleClose()
+
+  }
 
   return (
     <Box>
@@ -45,7 +53,7 @@ const FirmsModal = () => {
           label="Address*" variant="outlined" />
           <TextField id="outlined-basic" label="Image*"          
           variant="outlined" />
-          <Button  color="info" variant="contained">ADD FIRM</Button>
+          <Button onClick={handleAddFirm}  color="info" variant="contained">ADD FIRM</Button>
         </Box>
       </Modal>
     </Box>

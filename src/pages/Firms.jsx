@@ -9,7 +9,7 @@ import FirmsModal from "../component/Modal";
 
 const Firms = () => {
 
-  const { getFirms } = useStockRequest();
+  const { getFirms} = useStockRequest();
   const dispatch = useDispatch();
   const { firmsData, loading, error } = useSelector((state) => state.firms);
 
@@ -21,6 +21,8 @@ const Firms = () => {
     <Box>
       <h2>Firms</h2>
       <FirmsModal/>
+      {/* <loading && <img src/> */}
+      {/* error && <Typografy>hay aksi</Typografy> */}
 
       <Box display="flex" flexWrap="wrap" justifyContent="space-between" alignItems="center">
         {firmsData?.map((firm) => (
