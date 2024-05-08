@@ -23,10 +23,17 @@ const firmSlice = createSlice({
         state.loading=false
         state.error=true
 
+    },
+    removeFirm:(state,{payload})=>{
+      
+      return {
+        ...state,
+        firmsData:state.firmsData.filter(firmList=>firmList._id !== payload)
+      }
     }
   }
 });
 
-export const {firmPending,firmSuccess,firmRegister} = firmSlice.actions
+export const {firmPending,firmSuccess,firmRegister,removeFirm} = firmSlice.actions
 
 export default firmSlice.reducer
