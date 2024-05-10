@@ -41,7 +41,7 @@ const useStockRequest = () => {
     dispatch(firmPending());
     try {
       const { data } = await axiosToken(`/${path}`);
-      const stockData = data.data;// bunu şundan dolayı yaptık api dan gelen veriler data nın içinde data var onun içinde data.data diye içerisine yazmadık da onu bir değişken olarak atadık.Çünkü 45. sırada payloadın içinde data.data şeklinde yazmaya izin vermiyor.
+      const stockData = data.data; // bunu şundan dolayı yaptık api dan gelen veriler data nın içinde data var onun içinde data.data diye içerisine yazmadık da onu bir değişken olarak atadık.Çünkü 45. sırada payloadın içinde data.data şeklinde yazmaya izin vermiyor.
       dispatch(getStockSuccess({ stockData, path })); // burada klasik payload yazıyoruz aslında ancak burada payloadın içinde 2 parametre olduğundan destruc edip yzıldı
       console.log(data);
     } catch (error) {
@@ -49,12 +49,13 @@ const useStockRequest = () => {
       console.log(error);
     }
   };
-  const deleteStock = async (path = "firms") => {
+  // path paraetresi verilmez ise deafult olarak firms atandı.id yi de delete id ile sildiği için vermek zorundasın
+  const deleteStock = async (path = "firms", id) => {
     dispatch(firmPending());
     try {
-      await axiosToken(`/${path}/{id}`);
+      await axiosToken.delete(`/${path}/${id}`); // delete işlemi herhangi bir şey döndürmediği için değişkene atamaya gerek yokama delete yazmak zorundasın dikkat et!
 
-      getStockSuccess(path); // slice da eklemeseydim buraya data.data demem gerekecekti ben slice e ekledim
+      getStock(path); // get fonk yeniden çağıracaksın
     } catch (error) {
       dispatch(firmRegister());
       console.log(error);
@@ -70,10 +71,9 @@ const useStockRequest = () => {
   //     console.log(error);
   //   }
   // };
- 
 
   // return { getStock, removeFirm,deleteStock };
-  return { getStock,deleteStock };
+  return { getStock, deleteStock };
 };
 
 export default useStockRequest;

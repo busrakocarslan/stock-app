@@ -5,7 +5,7 @@ import FirmsCard from "../component/FirmsCard";
 import { Box, Typography } from "@mui/material";
 import Modal from "../component/Modal";
 import FirmsModal from "../component/Modal";
-import loading from "../assets/loading.gif"
+import loadingGif from "../assets/loading.gif"
 // import { firmPending } from "../features/firmSlice"
 
 const Firms = () => {
@@ -24,9 +24,9 @@ const Firms = () => {
 
   return (
     <Box>
-      <h2>Firms</h2>
+      <Typography variant="h3" color="primary.main" mb={2}>Firms</Typography>
       <FirmsModal/>
-      {loading && <img src={loading} alt="Loading" />} 
+      {loading && <img src={loadingGif} alt="Loading" />} 
     
       {error && <Typography variant="body1">Hay aksi, bir hata oluştu!</Typography>}
 

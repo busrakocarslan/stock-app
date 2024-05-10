@@ -59,6 +59,9 @@
 // Mapleme genellikle bir şeyin bir başka şeye dönüştürülmesi olarak düşünülebilir. Örneğin, bir veri modelinin bir başka veri modeline dönüştürülmesi, bir işlevin bir başka işlevsel yapıya dönüştürülmesi veya bir algoritmanın bir başka algoritmayla değiştirilmesi gibi durumlar mapleme kavramına örnektir.
 
 // Mapleme aynı zamanda veri dönüştürme, veri eşlemesi veya fonksiyonel dönüşüm gibi terimlerle de ilişkilendirilebilir. Bu kavramlar, bir veri veya işlevin başka bir formata veya yapıya dönüştürülmesini ifade ederken kullanılır. Bu, yazılım geliştirme sürecinde kodun optimize edilmesi, daha iyi performans elde edilmesi veya daha temiz ve okunabilir kod oluşturulması için sıkça kullanılan bir tekniktir.
+//TODO_DELETE kımsı
+// deletestock adında fonksiyonuzu yine parametreli yazıyoruz çünkü her yerde aynı işelmei yapsın diye silme işşlemi olduğu için delete yazmak zorunlu data dan gelen id bilgisini de vermek zorundayız parametrede,.
+// delete işlemini yaptıktan sonra yeniden get işlmei yapıyoruz silinen olmadan güncellenmiş hali geliyor.
 
 
 

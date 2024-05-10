@@ -11,12 +11,11 @@ import { Box, Stack } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 // import { editFirm, removeFirm } from '../features/firmSlice';
 import useStockRequest from "../services/useStockRequest";
+import { btnStyle } from "../styles/globalStyles"
 
 const FirmsCard = ({ _id, image, name, address,phone }) => {
-  const btnStyle={
-    "&:hover":{color:"red"}
-  }
-  const { removeFirm,deleteStock } = useStockRequest();
+ 
+  const { deleteStock } = useStockRequest();
   const { firmsList } = useSelector((state) => state.firms);
   // const dispatch=useDispatch()// dispatch i useStockRequestte removefilm i tanımlarken kullanıyorsun thunk kullanmadıysan burada kullanamazsın
   // const handleClean = () => {
@@ -61,7 +60,7 @@ const FirmsCard = ({ _id, image, name, address,phone }) => {
           sx={{ objectPosition: "center", objectFit: "contain" }}
         />
         <Box>
-          <Button size="small" onClick={()=>deleteStock("firms",_id)}>
+          <Button size="small" onClick={()=>deleteStock("firms",_id)}>{/*path parametre olarak geliyor id ile de hangi firma bilgisi geçiyor. */}
             <DeleteOutlineTwoToneIcon color="secondary" sx={btnStyle} />{" "}
           </Button>
           <Button size="small" onClick={() => handleEdit(_id)}>
