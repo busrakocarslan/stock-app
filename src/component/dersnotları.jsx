@@ -62,6 +62,9 @@
 //TODO_DELETE kımsı
 // deletestock adında fonksiyonuzu yine parametreli yazıyoruz çünkü her yerde aynı işelmei yapsın diye silme işşlemi olduğu için delete yazmak zorunlu data dan gelen id bilgisini de vermek zorundayız parametrede,.
 // delete işlemini yaptıktan sonra yeniden get işlmei yapıyoruz silinen olmadan güncellenmiş hali geliyor.
+// he rsaferinde refresh yapınca bizi atmaması için : indexedDb veri tabanına benziyor daha büyük alanlar saklanabiliyor.kullanımı komplex ama alanı büyük. ama çok büyük veri saklayacaksak bunu be tarafında saklamalıyız. girdiğimiz cihaza göre local veriler değişebileceği için öreneğin hem cep telefonundan hem de pc de girdiğimizde spetette ürünleri görtemek için be de saklanıyor local de saklasan cihaz değişince bulamayız o yüzden BE de saklamak gerek.
+//* burada useri sakalyacağız bunun için hazır 3part kütüphaneler var redux-persist ara yazılım miidlewire gibi.defauşt hali local ,sessiona atamak için özellikle yazmak gerek .bunu store alanına ekliyoruz. 
+
 
 
 
