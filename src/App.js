@@ -1,7 +1,7 @@
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AppRouter from "./router/AppRouter";
 import {
-  teal,
+  
   amber,
   lightGreen,
   deepOrange,

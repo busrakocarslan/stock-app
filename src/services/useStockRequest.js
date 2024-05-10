@@ -1,13 +1,13 @@
 import { useDispatch } from "react-redux";
 import useAxios from "./useAxios";
 import {
-  firmSuccess,
+  
   firmRegister,
   firmPending,
-  removeFirmAction,
-  SalesSuccess,
+ 
   getStockSuccess,
 } from "../features/firmSlice";
+import { toastSuccessNotify,toastErrorNotify } from "../helper/ToastNotify";
 
 const useStockRequest = () => {
   const { axiosToken } = useAxios();
@@ -61,6 +61,21 @@ const useStockRequest = () => {
       console.log(error);
     }
   };
+
+//!-----------------Yeni bir firma ekleme işlemi-----------
+  const createStock = async (path ,firminfo) => {
+    dispatch(firmPending());
+    try {
+      await axiosToken.post(`/${path}`,firminfo);
+     toastSuccessNotify("added sucsessfully")
+      getStock(path); 
+      // console.log(data);
+    } catch (error) {
+      dispatch(firmRegister());
+      toastErrorNotify("Oops! there is something wrong for adding");
+      console.log(error);
+    }
+  };
   // const removeFirm = async (id) => {
   //   dispatch(firmPending());
   //   try {
@@ -73,9 +88,29 @@ const useStockRequest = () => {
   // };
 
   // return { getStock, removeFirm,deleteStock };
-  return { getStock, deleteStock };
+  return { getStock, deleteStock,createStock };
 };
 
 export default useStockRequest;
 
 // içerisinde hook kullanacağımız için costom hook şeklinde çağırıyoruz.
+
+
+// //!-----------Firma bilgilerinin güncellenmesi işlemi-----
+// const updateData = async (endpoint, datas, id) => {
+//   //? 3 durum için dispatch yayını adına firmSlice a ihtiyacımız var
+//   dispatch(fetchStart()); //* pending
+//   try {
+//     await axiosToken.patch(
+//       `/${endpoint}/${id}`, datas
+//     ); //* güvenlikli istek kullanıyoruz. Firma oluşturacağımız için '/firms' ekliyoruz
+//     // console.log(data);
+//     // dispatch(getDataSuccess(data)); //* fullfilled
+//     toastSuccessNotify("Updated succesfully!");
+//     getDatas(endpoint); //? oluşturma işlemi başarılı olduktan sonra firmaları getiren fonksiyon
+//   } catch (error) {
+//     // console.log(error);
+//     dispatch(fetchFail()); //* rejected
+//     toastErrorNotify("Oops! there is something wrong for updating");
+//   }
+// };

@@ -15,7 +15,7 @@ import { btnStyle } from "../styles/globalStyles"
 
 const FirmsCard = ({ _id, image, name, address,phone }) => {
  
-  const { deleteStock } = useStockRequest();
+  const { deleteStock,createStock } = useStockRequest();
   const { firmsList } = useSelector((state) => state.firms);
   // const dispatch=useDispatch()// dispatch i useStockRequestte removefilm i tanımlarken kullanıyorsun thunk kullanmadıysan burada kullanamazsın
   // const handleClean = () => {
@@ -30,7 +30,8 @@ const FirmsCard = ({ _id, image, name, address,phone }) => {
     <Stack>
       <Card
         sx={{
-          maxWidth: 300,
+          minWidth: 300,
+          maxWidth:300,
           height: "350px",
           m: "5px",
           display: "flex",
@@ -63,7 +64,7 @@ const FirmsCard = ({ _id, image, name, address,phone }) => {
           <Button size="small" onClick={()=>deleteStock("firms",_id)}>{/*path parametre olarak geliyor id ile de hangi firma bilgisi geçiyor. */}
             <DeleteOutlineTwoToneIcon color="secondary" sx={btnStyle} />{" "}
           </Button>
-          <Button size="small" onClick={() => handleEdit(_id)}>
+          <Button size="small" onClick={() => createStock("firms")}>
             <EditTwoToneIcon color="success" sx={btnStyle} />
           </Button>
         </Box>

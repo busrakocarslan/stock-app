@@ -16,7 +16,7 @@ const Firms = () => {
 
   useEffect(() => {
     getStock("firms")// tek bir fonk parametreli yazdığımızdan çağırıken içerisine parametre koymamız gerek.
-    getStock("sales")
+    // getStock("sales")
 
     // getFirms();
     // getSales() // bu fonk bize api dan firma bil getirecek. Başka yerde de lazım olacağından gelen verileri global state de tutmak lazım.
@@ -28,7 +28,7 @@ const Firms = () => {
       <FirmsModal/>
       {loading && <img src={loadingGif} alt="Loading" />} 
     
-      {error && <Typography variant="body1">Hay aksi, bir hata oluştu!</Typography>}
+      {/* {error && <Typography variant="body1">Hay aksi, bir hata oluştu!</Typography>} */}
 
       <Box display="flex" flexWrap="wrap" justifyContent="space-between" alignItems="center">
         {firms?.map((firm) => (
