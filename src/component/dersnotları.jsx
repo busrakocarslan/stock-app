@@ -45,5 +45,36 @@
 //!axios İNsTaNCE 
 // axiosu kullanmamızı basitleştiren bir yöntem servise klasörünün altında yeni bir file açıp 
 // const instance=axios.create({baseUrl:"",timeout:"",headers:""}) şeklinde bir yapı bu get post gibi bir işlem değil axiosun içinde oln bir yöntem instance bu bize bütün configleri(çalışma hali) verilmiş bir instance veriyor, adına instance dışında da bir şey verilebilir.bunu ör şöyle çağoralacak instance.get instance.post gibi sadece devamındaki endpoint eklenecek
+//! ------------------------------------------------------------------
+//! --------------------------9/5/2024 üçüncü gün ---------------------------
+//! ------------------------------------------------------------------
+//* yazacağımız getfirms fonksiyonuna diğer yerlerde de ihtiyacımız olduğu için globalde tanımladık, componentin dışında tanımlayarak export etsek de içerisinde hook kullanmamız gerektiğinden hooklar içinde ya comp ya da hook grektiğinden globalde costom hook helinde yazmak en doğrusu.
+//Api den gelen tüm bilgileri global state de slice dosyasında initinial state dosyasında boş array olarak aldık.
+// oluşturacağımız slice da her bir parametremiz için ayrı ayrı fonc yazmak yerine tek fonk ile yazıp kod kalabalığından kurtulmak işstedik. 
+//  öncelikle stockrequeste fonksiyonumuzu get stock olarak teke indşirdik. pat bilgisini parametre olarak verdik fonksiyona.Birde dispatchden çağırdığımız fonk farklılığı vardı, onu da düzenledik.
+// dispatch de olan farklılık da state in adı idi. Stock quaride parametrik olarak gönderdiğimiz path bilgisini slace a atayarak onu da paraöeterik hale getirmiş olduk. 
+//*Maping yönteminden bahsetti şu gelirse bu anla diye atama yapmak aslında  bilgiyi aşağoıya ekledimn
+// "Mapleme" terimi, yazılım geliştirme sürecinde kullanılan bir terimdir ve genellikle bir problem alanını veya bir işlevi başka bir alana veya işlevsel bir yapıya dönüştürme sürecini ifade eder. Genellikle bu, bir veri yapısının bir başka veri yapısına dönüştürülmesini veya bir algoritmanın bir başka algoritmaya dönüştürülmesini içerir.
+
+// Mapleme genellikle bir şeyin bir başka şeye dönüştürülmesi olarak düşünülebilir. Örneğin, bir veri modelinin bir başka veri modeline dönüştürülmesi, bir işlevin bir başka işlevsel yapıya dönüştürülmesi veya bir algoritmanın bir başka algoritmayla değiştirilmesi gibi durumlar mapleme kavramına örnektir.
+
+// Mapleme aynı zamanda veri dönüştürme, veri eşlemesi veya fonksiyonel dönüşüm gibi terimlerle de ilişkilendirilebilir. Bu kavramlar, bir veri veya işlevin başka bir formata veya yapıya dönüştürülmesini ifade ederken kullanılır. Bu, yazılım geliştirme sürecinde kodun optimize edilmesi, daha iyi performans elde edilmesi veya daha temiz ve okunabilir kod oluşturulması için sıkça kullanılan bir tekniktir.
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// store ile alakalı dersin sonundaki bilgileri yaz!!!!!

@@ -12,15 +12,19 @@ import { useDispatch, useSelector } from "react-redux";
 // import { editFirm, removeFirm } from '../features/firmSlice';
 import useStockRequest from "../services/useStockRequest";
 
-const FirmsCard = ({ _id, image, name, address }) => {
-  const { removeFirm } = useStockRequest();
+const FirmsCard = ({ _id, image, name, address,phone }) => {
+  const btnStyle={
+    "&:hover":{color:"red"}
+  }
+  const { removeFirm,deleteStock } = useStockRequest();
   const { firmsList } = useSelector((state) => state.firms);
   // const dispatch=useDispatch()// dispatch i useStockRequestte removefilm i tanımlarken kullanıyorsun thunk kullanmadıysan burada kullanamazsın
-  const handleClean = () => {
-    //
-    removeFirm(_id);
-    console.log(_id);
-  };
+  // const handleClean = () => {
+  //   //
+  //   // removeFirm(_id);
+  //   deleteStock("firms",_id)
+  //   console.log(_id);
+  // };
   const handleEdit = (_id) => {};
 
   return (
@@ -34,14 +38,19 @@ const FirmsCard = ({ _id, image, name, address }) => {
           flexDirection: "column",
           justifyContent: "space-around",
           alignItems: "center",
+          p:2
         }}
       >
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {name}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          
+          <Typography variant="body2" mb="5px" color="text.secondary">
             {address}
+          </Typography>
+          <Typography gutterBottom variant="body2" component="text.secondary">
+            {phone}
           </Typography>
         </CardContent>
         <CardMedia
@@ -52,11 +61,11 @@ const FirmsCard = ({ _id, image, name, address }) => {
           sx={{ objectPosition: "center", objectFit: "contain" }}
         />
         <Box>
-          <Button size="small" onClick={() => handleClean(_id)}>
-            <DeleteOutlineTwoToneIcon color="error" />{" "}
+          <Button size="small" onClick={()=>deleteStock("firms",_id)}>
+            <DeleteOutlineTwoToneIcon color="secondary" sx={btnStyle} />{" "}
           </Button>
           <Button size="small" onClick={() => handleEdit(_id)}>
-            <EditTwoToneIcon color="success" />
+            <EditTwoToneIcon color="success" sx={btnStyle} />
           </Button>
         </Box>
       </Card>

@@ -27,7 +27,7 @@ const FirmsModal = () => {
   const handleClose = () => setOpen(false);
   const dispatch=useDispatch()
   const handleAddFirm=()=>{
-    dispatch(addFirm())
+    // dispatch(addFirm())
     handleClose()
 
   }

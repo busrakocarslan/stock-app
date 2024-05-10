@@ -10,12 +10,16 @@ import loading from "../assets/loading.gif"
 
 const Firms = () => {
 
-  const { getFirms} = useStockRequest();
-  const dispatch = useDispatch();
-  const { firmsData, loading, error } = useSelector((state) => state.firms);
+  const {getStock,stockData} = useStockRequest();
+  // const dispatch = useDispatch();
+  const { firms, loading, error } = useSelector((state) => state.firms);
 
   useEffect(() => {
-    getFirms(); // bu fonk bize api dan firma bil getirecek. Başka yerde de lazım olacağından gelen verileri global state de tutmak lazım.
+    getStock("firms")// tek bir fonk parametreli yazdığımızdan çağırıken içerisine parametre koymamız gerek.
+    getStock("sales")
+
+    // getFirms();
+    // getSales() // bu fonk bize api dan firma bil getirecek. Başka yerde de lazım olacağından gelen verileri global state de tutmak lazım.
   }, []);
 
   return (
@@ -27,7 +31,7 @@ const Firms = () => {
       {error && <Typography variant="body1">Hay aksi, bir hata oluştu!</Typography>}
 
       <Box display="flex" flexWrap="wrap" justifyContent="space-between" alignItems="center">
-        {firmsData?.map((firm) => (
+        {firms?.map((firm) => (
           <FirmsCard key={firm._id} {...firm}></FirmsCard>
         ))}
       </Box>
