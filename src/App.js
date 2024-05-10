@@ -32,16 +32,7 @@ function App() {
         main: purple["500"],
       },      
     },
-    overrides: {
-      MuiListItem: {
-        root: {
-          '&:hover': {
-            backgroundColor: 'white',
-            color: 'blue', // Metin rengi
-          },
-        },
-      },
-    },
+   
   });
   return (
     <>
