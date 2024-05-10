@@ -63,11 +63,11 @@ const useStockRequest = () => {
   };
 
 //!-----------------Yeni bir firma ekleme işlemi-----------
-  const createStock = async (path ,firminfo) => {
+  const createStock = async (path="firms" ,firminfo) => {
     dispatch(firmPending());
     try {
       await axiosToken.post(`/${path}`,firminfo);
-     toastSuccessNotify("added sucsessfully")
+     toastSuccessNotify(`${path} added successfully`)
       getStock(path); 
       // console.log(data);
     } catch (error) {

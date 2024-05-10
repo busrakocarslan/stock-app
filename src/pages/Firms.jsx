@@ -1,21 +1,23 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useStockRequest from "../services/useStockRequest";
 import { useDispatch, useSelector } from "react-redux";
 import FirmsCard from "../component/FirmsCard";
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import Modal from "../component/Modal";
 import FirmsModal from "../component/Modal";
-import loadingGif from "../assets/loading.gif"
-// import { firmPending } from "../features/firmSlice"
+import loadingGif from "../assets/loading.gif";
 
 const Firms = () => {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
-  const {getStock,stockData} = useStockRequest();
+  const { getStock, stockData } = useStockRequest();
   // const dispatch = useDispatch();
   const { firms, loading, error } = useSelector((state) => state.firms);
 
   useEffect(() => {
-    getStock("firms")// tek bir fonk parametreli yazdığımızdan çağırıken içerisine parametre koymamız gerek.
+    getStock("firms"); // tek bir fonk parametreli yazdığımızdan çağırıken içerisine parametre koymamız gerek.
     // getStock("sales")
 
     // getFirms();
@@ -24,15 +26,30 @@ const Firms = () => {
 
   return (
     <Box>
-      <Typography variant="h3" color="primary.main" mb={2}>Firms</Typography>
-      <FirmsModal/>
-      {loading && <img src={loadingGif} alt="Loading" />} 
-    
+      <Typography variant="h3" color="primary.main" mb={2}>
+        Firms
+      </Typography>
+      <Button color="secondary" variant="contained" onClick={handleOpen}>
+        ADD fİRMS
+      </Button>
+      <FirmsModal handleClose={handleClose} open={open} />
+      {loading && <img src={loadingGif} alt="Loading" />}
+
       {/* {error && <Typography variant="body1">Hay aksi, bir hata oluştu!</Typography>} */}
 
-      <Box display="flex" flexWrap="wrap" justifyContent="space-between" alignItems="center">
+      <Box
+        display="flex"
+        flexWrap="wrap"
+        justifyContent="space-between"
+        alignItems="center"
+      >
         {firms?.map((firm) => (
-          <FirmsCard key={firm._id} {...firm}></FirmsCard>
+          <FirmsCard
+            key={firm._id}
+            {...firm}
+            handleClose={handleClose}
+            open={open}
+          ></FirmsCard>
         ))}
       </Box>
     </Box>

@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useStockRequest from "../services/useStockRequest";
 import { btnStyle } from "../styles/globalStyles"
 
-const FirmsCard = ({ _id, image, name, address,phone }) => {
+const FirmsCard = ({ _id, image, name, address,phone },open,handleClose) => {
  
   const { deleteStock,createStock } = useStockRequest();
   const { firmsList } = useSelector((state) => state.firms);
@@ -24,7 +24,9 @@ const FirmsCard = ({ _id, image, name, address,phone }) => {
   //   deleteStock("firms",_id)
   //   console.log(_id);
   // };
-  const handleEdit = (_id) => {};
+  const handleEdit = (_id) => {
+    
+  };
 
   return (
     <Stack>

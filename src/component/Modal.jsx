@@ -21,10 +21,8 @@ const style = {
   p: 4,
 };
 
-const FirmsModal = () => {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+const FirmsModal = ({handleClose,open}) => {
+  
   const { createStock } = useStockRequest();
   const inputSchema = object({
     name: string().required("Firma ismi zorunludur"),
@@ -35,9 +33,7 @@ const FirmsModal = () => {
 
   return (
     <Box>
-      <Button color="secondary" variant="contained" onClick={handleOpen}>
-        Add Firm
-      </Button>
+     
       <Modal
         open={open}
         onClose={handleClose}
@@ -111,6 +107,7 @@ const FirmsModal = () => {
                 id="outlined-basic"
                 label="Image*"
                 variant="outlined"
+                type="url"
                 name="image"
                 value={values.image}
                 onChange={handleChange}
