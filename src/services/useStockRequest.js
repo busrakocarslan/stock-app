@@ -76,6 +76,35 @@ const useStockRequest = () => {
       console.log(error);
     }
   };
+  //!-----------Firma bilgilerinin güncellenmesi işlemi-----
+  const putStock = async (path="firms",id ,firminfo) => {
+    dispatch(firmPending());
+    try {
+      await axiosToken.put(`/${path}/${id}`,firminfo);
+     toastSuccessNotify(`${path} updated successfully`)
+      getStock(path); 
+      // console.log(data);
+    } catch (error) {
+      dispatch(firmRegister());
+      toastErrorNotify("Oops! there is something wrong for updating");
+      console.log(error);
+    }
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   // const removeFirm = async (id) => {
   //   dispatch(firmPending());
   //   try {
@@ -88,7 +117,7 @@ const useStockRequest = () => {
   // };
 
   // return { getStock, removeFirm,deleteStock };
-  return { getStock, deleteStock,createStock };
+  return { getStock, deleteStock,createStock,putStock };
 };
 
 export default useStockRequest;
@@ -96,7 +125,7 @@ export default useStockRequest;
 // içerisinde hook kullanacağımız için costom hook şeklinde çağırıyoruz.
 
 
-// //!-----------Firma bilgilerinin güncellenmesi işlemi-----
+// 
 // const updateData = async (endpoint, datas, id) => {
 //   //? 3 durum için dispatch yayını adına firmSlice a ihtiyacımız var
 //   dispatch(fetchStart()); //* pending

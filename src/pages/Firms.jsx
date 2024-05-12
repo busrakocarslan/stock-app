@@ -11,7 +11,8 @@ const Firms = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  const [selectedFirmId,setSelectedFirmId]=useState()// selectedFirm, seçilen firmanın bilgilerini tutacak ,ilk değeri null olarak ayarlandı başlangıçta herhangi bir firma seçilmemesi için
+console.log(selectedFirmId);
   const { getStock, stockData } = useStockRequest();
   // const dispatch = useDispatch();
   const { firms, loading, error } = useSelector((state) => state.firms);
@@ -32,7 +33,7 @@ const Firms = () => {
       <Button color="secondary" variant="contained" onClick={handleOpen}>
         ADD fİRMS
       </Button>
-      <FirmsModal handleClose={handleClose} open={open} />
+      <FirmsModal handleClose={handleClose} open={open} selectedFirmId={selectedFirmId} />
       {loading && <img src={loadingGif} alt="Loading" />}
 
       {/* {error && <Typography variant="body1">Hay aksi, bir hata oluştu!</Typography>} */}
@@ -46,9 +47,10 @@ const Firms = () => {
         {firms?.map((firm) => (
           <FirmsCard
             key={firm._id}
-            {...firm}
-            handleClose={handleClose}
-            open={open}
+            firm={firm}
+
+            setSelectedFirmId={setSelectedFirmId}            
+            handleOpen={handleOpen}
           ></FirmsCard>
         ))}
       </Box>

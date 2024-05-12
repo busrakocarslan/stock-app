@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -21,32 +21,47 @@ const style = {
   p: 4,
 };
 
-const FirmsModal = ({handleClose,open}) => {
-  
-  const { createStock } = useStockRequest();
+const FirmsModal = ({ handleClose, open, selectedFirmId }) => {
+  const { createStock, putStock } = useStockRequest();
+  const [selectedFirm, setSelectedFirm] = useState(null); //selectedFirm, seçilen firmanın bilgilerini tutacak ,ilk değeri null olarak ayarlandı başlangıçta herhangi bir firma seçilmemesi için
   const inputSchema = object({
     name: string().required("Firma ismi zorunludur"),
     phone: string().required("Telefon numarası zorunludur"),
     address: string().required("Adress bilgisi zorunludur"),
-    image:string(),
+    image: string(),
   });
+ console.log(selectedFirmId);
+
+ useEffect(() => {
+setSelectedFirm(selectedFirmId)
+}, [selectedFirmId]);
+ 
+
 
   return (
     <Box>
-     
       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-      >
+      > 
+      
         <Formik
-          initialValues={{ name: "", phone: "", address: "", image: "" }}
+        initialValues={{
+          name: selectedFirm ? selectedFirmId.name : "",
+          phone: selectedFirm ? selectedFirmId.phone : "",
+          address: selectedFirm ? selectedFirmId.address : "",
+          image: selectedFirm ? selectedFirmId.image : ""
+        }}
           validationSchema={inputSchema}
           onSubmit={(values, actions) => {
-            createStock("firms", values);
+            if (selectedFirmId) {
+              putStock("firms", selectedFirmId._id, values);
+            } else {
+              createStock("firms", values);
+            }
             handleClose();
-
             actions.resetForm();
             actions.setSubmitting(false);
           }}
@@ -60,66 +75,56 @@ const FirmsModal = ({handleClose,open}) => {
             isSubmitting,
           }) => (
             <Form>
-            <Box
-              
-              sx={style}
-              display="flex"
-              flexDirection="column"
-              gap="1rem"
-            >
-              <TextField
-                id="outlined-basic"
-                label="Firm Name*"
-                name="name"
-                type="text"
-                variant="outlined"
-                value={values.name}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={touched.name && Boolean(errors.name)}
-                helperText={touched.name && errors.name}
-              />
-              <TextField
-                id="outlined-basic"
-                type="phone"
-                label="Phone*"
-                name="phone"
-                variant="outlined"
-                value={values.phone}
+              <Box sx={style} display="flex" flexDirection="column" gap="1rem">
+                <TextField
+                  id="outlined-basic"
+                  label="Firm Name*"
+                  name="name"
+                  type="text"
+                  variant="outlined"
+                  value={values.name}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={touched.name && Boolean(errors.name)}
+                  helperText={touched.name && errors.name}
+                />
+                <TextField
+                  id="outlined-basic"
+                  type="phone"
+                  label="Phone*"
+                  name="phone"
+                  variant="outlined"
+                  value={values.phone}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   error={touched.phone && Boolean(errors.phone)}
                   helperText={touched.phone && errors.phone}
-              />
-              <TextField
-                id="outlined-basic"
-                type="text"
-                label="Address*"
-                name="address"
-                variant="outlined"
-                value={values.address}
+                />
+                <TextField
+                  id="outlined-basic"
+                  type="text"
+                  label="Address*"
+                  name="address"
+                  variant="outlined"
+                  value={values.address}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   error={touched.address && Boolean(errors.address)}
                   helperText={touched.address && errors.address}
-              />
-              <TextField
-                id="outlined-basic"
-                label="Image*"
-                variant="outlined"
-                type="url"
-                name="image"
-                value={values.image}
-                onChange={handleChange}
-              />
-              <Button
-                type="submit"
-                color="info"
-                variant="contained"
-              >
-                ADD FIRM
-              </Button>
-            </Box>
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Image*"
+                  variant="outlined"
+                  type="url"
+                  name="image"
+                  value={values.image}
+                  onChange={handleChange}
+                />
+                <Button type="submit" color="info" variant="contained">
+                  ADD FIRM
+                  </Button>
+              </Box>
             </Form>
           )}
         </Formik>

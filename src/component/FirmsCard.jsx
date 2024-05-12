@@ -13,20 +13,16 @@ import { useDispatch, useSelector } from "react-redux";
 import useStockRequest from "../services/useStockRequest";
 import { btnStyle } from "../styles/globalStyles"
 
-const FirmsCard = ({ _id, image, name, address,phone },open,handleClose) => {
+const FirmsCard = ({firm,handleOpen,open,selectedFirmId,setSelectedFirmId}) => {
+  const { _id, image, name, address,phone}=firm
  
   const { deleteStock,createStock } = useStockRequest();
   const { firmsList } = useSelector((state) => state.firms);
   // const dispatch=useDispatch()// dispatch i useStockRequestte removefilm i tanımlarken kullanıyorsun thunk kullanmadıysan burada kullanamazsın
-  // const handleClean = () => {
-  //   //
-  //   // removeFirm(_id);
-  //   deleteStock("firms",_id)
-  //   console.log(_id);
-  // };
-  const handleEdit = (_id) => {
-    
-  };
+ const handleEdit=()=>{
+  setSelectedFirmId(firm)
+  handleOpen()
+ }
 
   return (
     <Stack>
@@ -66,8 +62,8 @@ const FirmsCard = ({ _id, image, name, address,phone },open,handleClose) => {
           <Button size="small" onClick={()=>deleteStock("firms",_id)}>{/*path parametre olarak geliyor id ile de hangi firma bilgisi geçiyor. */}
             <DeleteOutlineTwoToneIcon color="secondary" sx={btnStyle} />{" "}
           </Button>
-          <Button size="small" onClick={() => createStock("firms")}>
-            <EditTwoToneIcon color="success" sx={btnStyle} />
+          <Button size="small" onClick={handleEdit} >
+            <EditTwoToneIcon   color="success" sx={btnStyle} />
           </Button>
         </Box>
       </Card>
