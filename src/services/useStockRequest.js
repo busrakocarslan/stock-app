@@ -53,11 +53,13 @@ const useStockRequest = () => {
   const deleteStock = async (path = "firms", id) => {
     dispatch(firmPending());
     try {
-      await axiosToken.delete(`/${path}/${id}`); // delete işlemi herhangi bir şey döndürmediği için değişkene atamaya gerek yokama delete yazmak zorundasın dikkat et!
+      await axiosToken.delete(`/${path}/${id}`); 
+      toastSuccessNotify(`${path} delete successfully`);// delete işlemi herhangi bir şey döndürmediği için değişkene atamaya gerek yokama delete yazmak zorundasın dikkat et!
 
       getStock(path); // get fonk yeniden çağıracaksın
     } catch (error) {
       dispatch(firmRegister());
+      toastErrorNotify("Oops! there is something wrong for adding")
       console.log(error);
     }
   };

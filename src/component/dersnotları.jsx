@@ -66,6 +66,9 @@
 //* burada useri sakalyacağız bunun için hazır 3part kütüphaneler var redux-persist ara yazılım miidlewire gibi.defauşt hali local ,sessiona atamak için özellikle yazmak gerek .bunu store alanına ekliyoruz. 
 //TODO __product kısmı
 //* muı X nin data gird adında bir tablo yapısı var daha özellikli oluşturulmuşalt kütüphane gibi yarn add ile kurmak gerekiyor
+//! ------------------------------------------------------------------
+//! --------------------------13/5/2024 beşinci gün ---------------------------
+//! ------------------------------------------------------------------
 
 
 

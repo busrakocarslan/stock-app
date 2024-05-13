@@ -8,17 +8,22 @@ import { useState } from "react";
 
 const Products = () => {
   const { getStock, stockData } = useStockRequest();
-  const { products } = useSelector((state) => state.firms);
+  const { products,categories,brands } = useSelector((state) => state.firms);
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
+  const initialState = { categoryId: "", brandId: "", name: "" };
+  const [infoProduct, setInfoProduct] = useState(initialState);
   const handleClose = () => {
     setOpen(false);
-    // setInfoBrand({name:"",image:""})
+    setInfoProduct(initialState)
+    
   };
 
   useEffect(() => {
     getStock("products");
+    getStock("categories");// modaldaki alan için 
+    getStock("brands");// modaldaki alan için
   }, []);
   return (
     <>
@@ -28,7 +33,7 @@ const Products = () => {
       <Button variant="contained" color="info" onClick={handleOpen}>
         New Product
       </Button>
-      <ProductModal open={open} handleClose={handleClose} />
+      <ProductModal open={open} handleClose={handleClose} infoProduct={infoProduct} />
 
       <Box
         display="flex"

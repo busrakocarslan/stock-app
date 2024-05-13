@@ -21,26 +21,27 @@ const ProductTable = ({ _id }) => {
 
       width: 130,
       editable: true,
-      valueGetter: (value, row) => row.categoryId?.name, // name direk category ıd de bulunmadığından valuegetter özelliği kullanıldı
+      valueGetter: (value, row) => value?.name, // name direk category ıd de bulunmadığından valuegetter özelliği kullanıldı
     },
     {
       field: "brandId", // burada yazan be ile aynı olmalı ancak data da Brand ıd de değil bilgi BrandId nin içinde name içinde bu yüzden dökümanda da yazılı olan valuegetter fonksiyonunu kullanmalı.
       headerName: "Brands",
       type: "number",
       width: 130,
-      editable: true,
-      valueGetter: (value, row) => row.brandId?.name, // name direk brand ıd de bulunmadığından valuegetter özelliği kullanıldı
+      // editable: true,// tablonun ilgili yerine tıklayıp değiştirmek için olan bir özellik eklenecekse edit de olmalı
+      valueGetter: (value, row) => row.brandId?.name, //value.name şeklinde de ulaşılıyor name direk brand ıd de bulunmadığından valuegetter özelliği kullanıldı. burada birinci parametre value, value ile direk fielde verdiğimiz dosyanın içine erişebiliyoruz.
     },
     {
       field: "name",
       headerName: "Name",
       description: "This column has a value getter and is not sortable.",
-      sortable: false,
+      // sortable: false,// sıralanabilme özelliği
       width: 130,
     },
     {
       field: "quantity", // bura be ile uyumlu ise direk veriler geliyor.
       headerName: "Stock",
+      // headerAling:"center",
       width: 150,
       editable: true,
     },
@@ -52,6 +53,7 @@ const ProductTable = ({ _id }) => {
       headerName: "Operations", // görünecek başlık
       getActions: (props) => [
         //  propsa alıştığım için props yazdım
+        
         <GridActionsCellItem
           icon={
             <DeleteOutlineTwoToneIcon
@@ -86,17 +88,18 @@ const ProductTable = ({ _id }) => {
         }}
         rows={products} //=>bu bilgi useSelector ile initialstate den geliyor
         columns={columns}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 5,
-            },
-          },
-        }}
+        // initialState={{
+        //   pagination: {
+        //     paginationModel: {
+        //       pageSize: 5,
+        //     },
+        //   },
+        // }}
         pageSizeOptions={[2, 3, 5]} // her sayfada kaç satır gösterileceğini buradan ayarlıyorsun
         checkboxSelection
         disableRowSelectionOnClick
-        getRowId={getRowId} // buraya verildi yukarıdaki 13. satırdaki fonk
+        getRowId={getRowId}// buraya verildi yukarıdaki 13. satırdaki fonk
+        // slots={{toolbar:GridTollBar}} 
         // headerClassName="tableHeader"
       />
     </Box>
