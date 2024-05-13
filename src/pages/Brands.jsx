@@ -45,7 +45,11 @@ const Brands = () => {
         {brands?.map((brand) => (
           <BrandsCard
             key={brand._id}
-            {...brand}
+            brand={brand}
+            setInfoBrand={setInfoBrand}
+            handleClose={handleClose}
+            handleOpen={handleOpen}
+
            
             
           ></BrandsCard>

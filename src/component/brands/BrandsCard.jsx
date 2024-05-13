@@ -9,12 +9,18 @@ import DeleteOutlineTwoToneIcon from "@mui/icons-material/DeleteOutlineTwoTone";
 import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
 import { Box, Stack } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-// import { editFirm, removeFirm } from '../features/firmSlice';
 import useStockRequest from "../../services/useStockRequest";
 import { btnStyle } from "../../styles/globalStyles"
 
-const BrandsCard = ({address,phone,image,_id,name}) => {
+const BrandsCard = ({brand,handleClose,handleOpen,setInfoBrand}) => {
+  const {address,phone,image,_id,name}=brand
     const { deleteStock,createStock } = useStockRequest();
+    const handleEdit=()=>{
+      setInfoBrand(brand)
+      handleOpen()
+      console.log(brand);
+
+    }
     
   return (
     <Stack>
@@ -54,7 +60,7 @@ const BrandsCard = ({address,phone,image,_id,name}) => {
           <Button size="small" onClick={()=>deleteStock("brands",_id)}>{/*path parametre olarak geliyor id ile de hangi firma bilgisi geçiyor. */}
             <DeleteOutlineTwoToneIcon color="secondary" sx={btnStyle} />{" "}
           </Button>
-          <Button size="small"  >
+          <Button size="small" onClick={handleEdit} >
             <EditTwoToneIcon   color="success" sx={btnStyle} />
           </Button>
         </Box>

@@ -18,23 +18,25 @@ const style = {
   p: 4,
 };
 
-const BrandsModal = ({open,handleClose,infoBrand,setInfoBrand}) => {
-
+const BrandsModal = ({ open, handleClose, infoBrand, setInfoBrand }) => {
   const { createStock, putStock } = useStockRequest();
- 
-//   console.log(infoBrand);
-  const handleBrand=(e)=>{
-   setInfoBrand({...infoBrand,[e.target.name]:e.target.value})
-  }
-  const handleSubmit=(e)=>{
+
+  //   console.log(infoBrand);
+  const handleBrand = (e) => {
     e.preventDefault()
-    createStock("brands",infoBrand)
-    setInfoBrand({name:"",image:""})
-    handleClose()
-
-  }
-
-
+    setInfoBrand({ ...infoBrand, [e.target.name]: e.target.value });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (infoBrand._id) {
+      putStock("brands",infoBrand._id,infoBrand);// infoBrand_id yi eklemez isen put işlemi yapılamıyor fonk'na bak useStockRequesten
+    } else {
+      createStock("brands", infoBrand);
+    }
+    
+    handleClose();
+    console.log(infoBrand._id);
+  };
 
   return (
     <Box>
@@ -44,26 +46,39 @@ const BrandsModal = ({open,handleClose,infoBrand,setInfoBrand}) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style} display="flex" component={"form"}  onSubmit={handleSubmit} flexDirection="column" gap="1rem">
+        <Box
+          sx={style}
+          display="flex"
+          flexDirection="column"
+          gap="1rem"
+          component={"form"}
+          onSubmit={handleSubmit}
+        >
           <TextField
-            id="outlined-basic"
+           
             label="Brand Name*"
             name="name"
+            id="name"
             type="text"
             variant="outlined"
+            value={infoBrand.name}
             onChange={handleBrand}
           />
 
           <TextField
-            id="outlined-basic"
+            id="image"
             label="Image URL*"
             variant="outlined"
             type="url"
             name="image"
+            value={infoBrand.image}
             onChange={handleBrand}
           />
           <Button type="submit" color="error" variant="contained">
-            add Brands
+            {
+                infoBrand._id? "UPDATE BRAND" : "SAVE BRAND"
+            }
+            
           </Button>
         </Box>
       </Modal>
