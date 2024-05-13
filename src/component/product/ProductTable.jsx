@@ -1,57 +1,90 @@
 // import React from 'react'
-import Box from '@mui/material/Box';
-import { DataGrid } from '@mui/x-data-grid';
-const columns = [
-    { field: 'id', headerName: 'ID', width: 90 },
+import Box from "@mui/material/Box";
+import { DataGrid, GridActionsCellItem, valueGetter } from "@mui/x-data-grid";
+import { type } from "@testing-library/user-event/dist/type";
+import DeleteOutlineTwoToneIcon from "@mui/icons-material/DeleteOutlineTwoTone";
+import useStockRequest from "../../services/useStockRequest";
+import { useSelector } from "react-redux";
+import { tableHeader } from "../../styles/globalStyles";
+
+const ProductTable = ({ _id }) => {
+  const { products } = useSelector((state) => state.firms);
+  const { deleteStock } = useStockRequest();
+  //!id sorunu için:
+  const getRowId = (row) => row._id; // yazdıktan sonra comp içinde kullan satır 79.
+  const columns = [
+    //!mui x data nın unique id zorunluluğu var, id bu projede "_id" olarak geldiğinden unique id ye ulaşamıyor. Dökümanda ayrıntısı var. bu sorunu aşmak için yıkarıdaki fonk yazıldı
+    { field: "_id", headerName: "#", minWidth: 100, flex: 1 }, // field kısmı bu stuna gelecek olan değerlerin nereden geleceğini yazıyor.verdiğimiz ismin Be den gelen isim ile eşleşmesi gerek,headername ise ekranda kullanıcının göreceği isim,with kısmını sabit verebildiğimiz gibi göreceli de verebiliriz.
     {
-      field: 'firstName',
-      headerName: 'First name',
-      width: 150,
+      field: "categoryId",
+      headerName: "Categories",
+
+      width: 130,
       editable: true,
+      valueGetter: (value, row) => row.categoryId?.name, // name direk category ıd de bulunmadığından valuegetter özelliği kullanıldı
     },
     {
-      field: 'lastName',
-      headerName: 'Last name',
-      width: 150,
+      field: "brandId", // burada yazan be ile aynı olmalı ancak data da Brand ıd de değil bilgi BrandId nin içinde name içinde bu yüzden dökümanda da yazılı olan valuegetter fonksiyonunu kullanmalı.
+      headerName: "Brands",
+      type: "number",
+      width: 130,
       editable: true,
+      valueGetter: (value, row) => row.brandId?.name, // name direk brand ıd de bulunmadığından valuegetter özelliği kullanıldı
     },
     {
-      field: 'age',
-      headerName: 'Age',
-      type: 'number',
-      width: 110,
-      editable: true,
-    },
-    {
-      field: 'fullName',
-      headerName: 'Full name',
-      description: 'This column has a value getter and is not sortable.',
+      field: "name",
+      headerName: "Name",
+      description: "This column has a value getter and is not sortable.",
       sortable: false,
-      width: 160,
-      valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
+      width: 130,
+    },
+    {
+      field: "quantity", // bura be ile uyumlu ise direk veriler geliyor.
+      headerName: "Stock",
+      width: 150,
+      editable: true,
+    },
+    //actions kısmında sadece buton render edilecek bu sebeple dökümantasyonda belirtildiği üzere rendercell adında ya da action bir fonk var onu kullanmamız gerek ya da valuegetter fonk var onu kullanman lazım. dökümandan bak.action daha kısa bu yüzden onunla yapıldı
+    //*getactions fonksiyonu bizim o bulundğu alandaki verilere ulaşmamızı sağlıyor.
+    {
+      field: "actions", // eğer getAction fonk kullanıyor ise  type-field actions yazmak zorunlu
+      type: "actions",
+      headerName: "Operations", // görünecek başlık
+      getActions: (props) => [
+        //  propsa alıştığım için props yazdım
+        <GridActionsCellItem
+          icon={
+            <DeleteOutlineTwoToneIcon
+              color="info"
+              sx={{
+                ":hover": {
+                  color: "error.main",
+                },
+              }}
+            />
+          }
+          onClick={() => deleteStock("products", props.id)} // getactios in içindeki tüm bilgilere props ile giriyoruz
+          label="delete"
+        />,
+      ],
+      width: 150,
+      editable: true,
     },
   ];
-  
-  const rows = [
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 14 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 31 },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 31 },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 11 },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-    { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-  ];
-
-
-
-
-const ProductTable = ({_id,categories,brand,name,stock}) => {
-  return  (
-    <Box sx={{ height: 400, width: '100%' }}>
+  return (
+    <Box color="info.main" sx={{ height: 400, width: "100%" }}>
       <DataGrid
-        rows={rows}
+        sx={{
+          boxShadow: 2,
+          border: 2,
+          borderColor: "info.light",
+          "& .MuiDataGrid-cell": { color: "darkgray" },
+          "& .MuiDataGrid-cell:hover": {
+            color: "info.main",
+            cursor: "pointer",
+          },
+        }}
+        rows={products} //=>bu bilgi useSelector ile initialstate den geliyor
         columns={columns}
         initialState={{
           pagination: {
@@ -60,16 +93,14 @@ const ProductTable = ({_id,categories,brand,name,stock}) => {
             },
           },
         }}
-        pageSizeOptions={[5]}
+        pageSizeOptions={[2, 3, 5]} // her sayfada kaç satır gösterileceğini buradan ayarlıyorsun
         checkboxSelection
         disableRowSelectionOnClick
+        getRowId={getRowId} // buraya verildi yukarıdaki 13. satırdaki fonk
+        // headerClassName="tableHeader"
       />
     </Box>
   );
-}
+};
 
-export default ProductTable
-
-
-
-
+export default ProductTable;

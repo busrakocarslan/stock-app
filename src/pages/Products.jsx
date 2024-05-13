@@ -40,12 +40,12 @@ const Products = () => {
      alignItems="center"
      marginTop={5}
    >
-     {products?.map((product) => (
-       <ProductTable key={product.id} {...product}/>
+     
+       <ProductTable/>{/*map ile döndün başta içerideki eleman kadar tablo oluştu yukarıda useEffect ile çağırdığından dönmene gerek yok */}
         
         
       
-     ))}
+   
    </Box></>
 
     
