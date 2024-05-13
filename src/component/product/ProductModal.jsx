@@ -12,9 +12,21 @@ import {
 } from "@mui/material";
 import { modalstyle } from "../../styles/globalStyles";
 import { useSelector } from "react-redux";
+import useStockRequest from "../../services/useStockRequest";
 
-const ProductModal = ({ open, handleClose, infoProduct }) => {
-  const { categories,brands } = useSelector((state) => state.firms);
+const ProductModal = ({ open, handleClose, infoProduct, setInfoProduct }) => {
+  const { createStock } = useStockRequest();
+  const { categories, brands } = useSelector((state) => state.firms);
+
+  const handleChange = (e) => {
+    setInfoProduct({ ...infoProduct, [e.target.name]: e.target.value });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    createStock("products", infoProduct);
+
+    handleClose();
+  };
   return (
     <Box>
       <Modal
@@ -29,7 +41,7 @@ const ProductModal = ({ open, handleClose, infoProduct }) => {
           flexDirection="column"
           gap="1rem"
           component={"form"}
-          //   onSubmit={handleSubmit}
+          onSubmit={handleSubmit}
         >
           <FormControl fullWidth>
             <InputLabel id="categoryId">Categories</InputLabel>
@@ -39,36 +51,40 @@ const ProductModal = ({ open, handleClose, infoProduct }) => {
               name="categoryId"
               value={infoProduct.categoryId}
               label="Categories"
-              // onChange={handleChange}
+              onChange={handleChange}
             >
               {categories.map((item) => (
-                <MenuItem key={item._id} value={item._id}>{item.name}</MenuItem>// be bizden id istediği için value da id veriyoruz.
+                <MenuItem key={item._id} value={item._id}>
+                  {item.name}
+                </MenuItem> // be bizden id istediği için value da id veriyoruz.
               ))}
             </Select>
           </FormControl>
           <FormControl fullWidth>
             <InputLabel id="brandId">Brands</InputLabel>
             <Select
-              labelId="categoryId"
-              id="categoryId"
-              name="categoryId"
+              labelId="brandId" // değiştirildi
+              id="brandId" // değiştirildi
+              name="brandId" // değiştirildi
               value={infoProduct.brandId}
-              label="Categories"
-              // onChange={handleChange}
+              label="Brands"
+              onChange={handleChange}
             >
               {brands.map((item) => (
-                <MenuItem key={item._id} value={item._id}>{item.name}</MenuItem>// be bizden id istediği için value da id veriyoruz.
+                <MenuItem key={item._id} value={item._id}>
+                  {item.name}
+                </MenuItem> // be bizden id istediği için value da id veriyoruz.
               ))}
             </Select>
           </FormControl>
           <TextField
-            label="Brand Name*"
+            label="name*"
             name="name"
             id="name"
             type="text"
             variant="outlined"
-            // value={infoBrand.name}
-            // onChange={handleBrand}
+            value={infoProduct.name}
+            onChange={handleChange}
           />
 
           <Button type="submit" color="error" variant="contained">
@@ -81,4 +97,3 @@ const ProductModal = ({ open, handleClose, infoProduct }) => {
 };
 
 export default ProductModal;
-

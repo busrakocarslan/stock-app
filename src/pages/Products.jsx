@@ -33,7 +33,7 @@ const Products = () => {
       <Button variant="contained" color="info" onClick={handleOpen}>
         New Product
       </Button>
-      <ProductModal open={open} handleClose={handleClose} infoProduct={infoProduct} />
+      <ProductModal open={open} handleClose={handleClose} infoProduct={infoProduct} setInfoProduct={setInfoProduct} />
 
       <Box
         display="flex"
