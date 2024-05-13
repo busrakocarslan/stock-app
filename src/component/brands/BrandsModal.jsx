@@ -18,10 +18,10 @@ const style = {
   p: 4,
 };
 
-const BrandsModal = ({open,handleClose}) => {
+const BrandsModal = ({open,handleClose,infoBrand,setInfoBrand}) => {
 
   const { createStock, putStock } = useStockRequest();
-  const [infoBrand,setInfoBrand]=useState({name:"",image:""})
+ 
 //   console.log(infoBrand);
   const handleBrand=(e)=>{
    setInfoBrand({...infoBrand,[e.target.name]:e.target.value})

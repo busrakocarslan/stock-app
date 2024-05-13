@@ -9,10 +9,12 @@ import BrandsModal from '../component/brands/BrandsModal';
 const Brands = () => {
   const { getStock, stockData } = useStockRequest();
   const { brands, loading, error } = useSelector((state) => state.firms);
-  const [open, setOpen] = useState(false); // liftingstate up yapıldı çünkü kardeşler arası da bu bilgiye ihtiyaç duyulduğundan propla gönderildi parentten
+  const [open, setOpen] = useState(false);
+  const [infoBrand,setInfoBrand]=useState({name:"",image:""}) // liftingstate up yapıldı çünkü kardeşler arası da bu bilgiye ihtiyaç duyulduğundan propla gönderildi parentten
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
+    setInfoBrand({name:"",image:""})
   };
   useEffect(()=>{
     getStock("brands")
@@ -25,7 +27,7 @@ const Brands = () => {
       <Button color="error"  variant="contained" onClick={handleOpen}>
         ADD BRAND
       </Button>
-      <BrandsModal open={open} handleClose={handleClose} />
+      <BrandsModal open={open} handleClose={handleClose} infoBrand={infoBrand} setInfoBrand={setInfoBrand} />
 
       
      

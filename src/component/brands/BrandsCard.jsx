@@ -51,7 +51,7 @@ const BrandsCard = ({address,phone,image,_id,name}) => {
           sx={{ objectPosition: "center", objectFit: "contain" }}
         />
         <Box>
-          <Button size="small" onClick={()=>deleteStock("firms",_id)}>{/*path parametre olarak geliyor id ile de hangi firma bilgisi geçiyor. */}
+          <Button size="small" onClick={()=>deleteStock("brands",_id)}>{/*path parametre olarak geliyor id ile de hangi firma bilgisi geçiyor. */}
             <DeleteOutlineTwoToneIcon color="secondary" sx={btnStyle} />{" "}
           </Button>
           <Button size="small"  >
