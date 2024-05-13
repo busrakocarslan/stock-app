@@ -3,22 +3,21 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { TextField } from "@mui/material";
+import { MenuItem, Select, TextField } from "@mui/material";
 
 const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    bgcolor: "background.paper",
-    border: "3px solid #972E0E",
-    boxShadow: 24,
-    p: 4,
-  };
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "3px solid #972E0E",
+  boxShadow: 24,
+  p: 4,
+};
 
-const ProductModal = ({open,handleClose}) => {
-   
+const ProductModal = ({ open, handleClose }) => {
   return (
     <Box>
       <Modal
@@ -33,10 +32,31 @@ const ProductModal = ({open,handleClose}) => {
           flexDirection="column"
           gap="1rem"
           component={"form"}
-        //   onSubmit={handleSubmit}
+          //   onSubmit={handleSubmit}
         >
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            // value={age}
+            label="Age"
+            // onChange={handleChange}
+          >
+            <MenuItem value={10}>Ten</MenuItem>
+            <MenuItem value={20}>Twenty</MenuItem>
+            <MenuItem value={30}>Thirty</MenuItem>
+          </Select>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            // value={age}
+            label="Age"
+            // onChange={handleChange}
+          >
+            <MenuItem value={10}>Ten</MenuItem>
+            <MenuItem value={20}>Twenty</MenuItem>
+            <MenuItem value={30}>Thirty</MenuItem>
+          </Select>
           <TextField
-           
             label="Brand Name*"
             name="name"
             id="name"
@@ -56,18 +76,15 @@ const ProductModal = ({open,handleClose}) => {
             // onChange={handleBrand}
           />
           <Button type="submit" color="error" variant="contained">
-           add product
-            
+            add product
           </Button>
         </Box>
       </Modal>
     </Box>
-  )
-}
+  );
+};
 
-export default ProductModal
-
-
+export default ProductModal;
 
 // const BrandsModal = ({ open, handleClose, infoBrand, setInfoBrand }) => {
 //   const { createStock, putStock } = useStockRequest();
@@ -84,8 +101,7 @@ export default ProductModal
 //     } else {
 //       createStock("brands", infoBrand);
 //     }
-    
+
 //     handleClose();
 //     console.log(infoBrand._id);
 //   };
-
