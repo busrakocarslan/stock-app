@@ -23,20 +23,14 @@ const style = {
 
 const FirmsModal = ({ handleClose, open, selectedFirmId }) => {
   const { createStock, putStock } = useStockRequest();
-  const [selectedFirm, setSelectedFirm] = useState(null); //selectedFirm, seçilen firmanın bilgilerini tutacak ,ilk değeri null olarak ayarlandı başlangıçta herhangi bir firma seçilmemesi için
+  //selectedFirm, seçilen firmanın bilgilerini tutacak ,ilk değeri null olarak ayarlandı başlangıçta herhangi bir firma seçilmemesi için
   const inputSchema = object({
     name: string().required("Firma ismi zorunludur"),
     phone: string().required("Telefon numarası zorunludur"),
     address: string().required("Adress bilgisi zorunludur"),
     image: string(),
   });
- console.log(selectedFirmId);
-
- useEffect(() => {
-setSelectedFirm(selectedFirmId)
-}, [selectedFirmId]);
- 
-
+  console.log(selectedFirmId);
 
   return (
     <Box>
@@ -45,15 +39,14 @@ setSelectedFirm(selectedFirmId)
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-      > 
-      
+      >
         <Formik
-        initialValues={{
-          name: selectedFirm ? selectedFirmId.name : "",
-          phone: selectedFirm ? selectedFirmId.phone : "",
-          address: selectedFirm ? selectedFirmId.address : "",
-          image: selectedFirm ? selectedFirmId.image : ""
-        }}
+          initialValues={{
+            name: selectedFirmId?.name || "",
+            phone: selectedFirmId?.phone || "",
+            address: selectedFirmId?.address || "",
+            image: selectedFirmId?.image || "",
+          }}
           validationSchema={inputSchema}
           onSubmit={(values, actions) => {
             if (selectedFirmId) {
@@ -122,8 +115,10 @@ setSelectedFirm(selectedFirmId)
                   onChange={handleChange}
                 />
                 <Button type="submit" color="info" variant="contained">
-                  ADD FIRM
-                  </Button>
+                 {
+                  selectedFirmId ? "SAVE FIRM" : "ADD FIRM"
+                 } 
+                </Button>
               </Box>
             </Form>
           )}

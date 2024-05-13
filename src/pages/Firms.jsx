@@ -10,8 +10,13 @@ import loadingGif from "../assets/loading.gif";
 const Firms = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const [selectedFirmId,setSelectedFirmId]=useState()// selectedFirm, seçilen firmanın bilgilerini tutacak ,ilk değeri null olarak ayarlandı başlangıçta herhangi bir firma seçilmemesi için
+  const [selectedFirmId,setSelectedFirmId]=useState()// selectedFirmId, seçilen firmanın bilgilerini tutacak ,ilk değeri null olarak ayarlandı başlangıçta herhangi bir firma seçilmemesi için
+  const handleClose = () => {
+    setOpen(false)
+    setSelectedFirmId(null)// add butonuna firmi seçtikten sonra tıkladığımda bilgileri silmesi için 
+
+  }
+ 
 console.log(selectedFirmId);
   const { getStock, stockData } = useStockRequest();
   // const dispatch = useDispatch();
@@ -48,7 +53,7 @@ console.log(selectedFirmId);
           <FirmsCard
             key={firm._id}
             firm={firm}
-
+           
             setSelectedFirmId={setSelectedFirmId}            
             handleOpen={handleOpen}
           ></FirmsCard>

@@ -13,15 +13,20 @@ import { useDispatch, useSelector } from "react-redux";
 import useStockRequest from "../services/useStockRequest";
 import { btnStyle } from "../styles/globalStyles"
 
-const FirmsCard = ({firm,handleOpen,open,selectedFirmId,setSelectedFirmId}) => {
+const FirmsCard = ({firm,handleOpen,open,selectedFirmId,setSelectedFirmId,setSelectedFirm}) => {
   const { _id, image, name, address,phone}=firm
  
   const { deleteStock,createStock } = useStockRequest();
   const { firmsList } = useSelector((state) => state.firms);
+ 
   // const dispatch=useDispatch()// dispatch i useStockRequestte removefilm i tanımlarken kullanıyorsun thunk kullanmadıysan burada kullanamazsın
  const handleEdit=()=>{
-  setSelectedFirmId(firm)
-  handleOpen()
+   handleOpen()
+   setSelectedFirmId(firm)
+   
+   
+   
+   
  }
 
   return (
