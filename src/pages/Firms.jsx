@@ -40,14 +40,13 @@ console.log(selectedFirmId);
       </Button>
       <FirmsModal handleClose={handleClose} open={open} selectedFirmId={selectedFirmId} />
       {loading && <img src={loadingGif} alt="Loading" />}
-
-      {/* {error && <Typography variant="body1">Hay aksi, bir hata oluştu!</Typography>} */}
-
+      {error && <Typography variant="body1">Hay aksi, bir hata oluştu!</Typography>}
       <Box
         display="flex"
         flexWrap="wrap"
         justifyContent="space-between"
         alignItems="center"
+        mt={5}
       >
         {firms?.map((firm) => (
           <FirmsCard

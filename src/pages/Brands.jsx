@@ -20,6 +20,7 @@ const Brands = () => {
     getStock("brands")
   },[])
   return (
+    
     <Box>
       <Typography variant="h3" color="primary.main" mb={2}>
         BRANDS
@@ -31,9 +32,9 @@ const Brands = () => {
 
       
      
-      {/* {loading && <img src={loadingGif} alt="Loading" />} */}
+      {loading && <img src={loadingGif} alt="Loading" />}
 
-      {/* {error && <Typography variant="body1">Hay aksi, bir hata oluştu!</Typography>} */}
+      {error && <Typography variant="body1">Hay aksi, bir hata oluştu!</Typography>}
 
       <Box
         display="flex"

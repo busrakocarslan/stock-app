@@ -34,6 +34,7 @@ const firmSlice = createSlice({
       //*square bracket yöntemi ile ayayınca içindekileri bir değişken olarak kabul ediyor. 
       //! destruc edilmiş hali 
       state[path]=stockData
+      state.error=false
       
      
     },
