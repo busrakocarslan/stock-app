@@ -8,9 +8,9 @@ import FirmsModal from "../component/Modal";
 import loadingGif from "../assets/loading.gif";
 
 const Firms = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);// lifting state up yapıldı çünkü kardeşler arası da bu bilgiye ihtiyaç duyulduğundan propla gönderildi parentten
   const handleOpen = () => setOpen(true);
-  const [selectedFirmId,setSelectedFirmId]=useState()// selectedFirmId, seçilen firmanın bilgilerini tutacak ,ilk değeri null olarak ayarlandı başlangıçta herhangi bir firma seçilmemesi için
+  const [selectedFirmId,setSelectedFirmId]=useState()// selectedFirmId, seçilen firmanın bilgilerini tutacak ,ilk değeri null olarak ayarlandı başlangıçta herhangi bir firma seçilmemesi için,put ile pst işlemi arasında eldeki tek fark id bilgisi olduğundna ona göre bir condition 
   const handleClose = () => {
     setOpen(false)
     setSelectedFirmId(null)// add butonuna firmi seçtikten sonra tıkladığımda bilgileri silmesi için 

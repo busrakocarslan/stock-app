@@ -49,7 +49,7 @@ const FirmsModal = ({ handleClose, open, selectedFirmId }) => {
           }}
           validationSchema={inputSchema}
           onSubmit={(values, actions) => {
-            if (selectedFirmId) {
+            if (selectedFirmId) {// içeride id var ise put isteği yapıp değişiklik yapacak değilse post işlemi yapıp firma ekleyecek
               putStock("firms", selectedFirmId._id, values);
             } else {
               createStock("firms", values);
@@ -116,7 +116,7 @@ const FirmsModal = ({ handleClose, open, selectedFirmId }) => {
                 />
                 <Button type="submit" color="info" variant="contained">
                  {
-                  selectedFirmId ? "SAVE FIRM" : "ADD FIRM"
+                  selectedFirmId ? "UPDATE FIRM" : "ADD FIRM"
                  } 
                 </Button>
               </Box>

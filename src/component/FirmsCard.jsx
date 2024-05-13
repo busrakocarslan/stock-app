@@ -22,7 +22,7 @@ const FirmsCard = ({firm,handleOpen,open,selectedFirmId,setSelectedFirmId,setSel
   // const dispatch=useDispatch()// dispatch i useStockRequestte removefilm i tanımlarken kullanıyorsun thunk kullanmadıysan burada kullanamazsın
  const handleEdit=()=>{
    handleOpen()
-   setSelectedFirmId(firm)
+   setSelectedFirmId(firm)// başlangıcı null olan selectedfirmid ye firm in ıd si atanmış oluyor
    
    
    

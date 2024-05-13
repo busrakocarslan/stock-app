@@ -1,13 +1,11 @@
 import { useDispatch } from "react-redux";
 import useAxios from "./useAxios";
 import {
-  
   firmRegister,
   firmPending,
- 
   getStockSuccess,
 } from "../features/firmSlice";
-import { toastSuccessNotify,toastErrorNotify } from "../helper/ToastNotify";
+import { toastSuccessNotify, toastErrorNotify } from "../helper/ToastNotify";
 
 const useStockRequest = () => {
   const { axiosToken } = useAxios();
@@ -37,6 +35,7 @@ const useStockRequest = () => {
   // };
 
   //? bu fonksiyon path kısmını paratemre olarak aldığından ayrı ayrı her işlem için fonk yazmak yerine tek bir fonk ile bu işlem hepsinde ayrı ayrı gerçekleşmiş oluyor.Burada buraya gelen path bilgisini de slice kısmında yazdığımız fonkiyona göndererek onu da parametrik hale getirdik.
+  //!-----------Firma bilgilerinin çağırılması işlemi-----
   const getStock = async (path = "firms") => {
     dispatch(firmPending());
     try {
@@ -50,6 +49,7 @@ const useStockRequest = () => {
     }
   };
   // path paraetresi verilmez ise deafult olarak firms atandı.id yi de delete id ile sildiği için vermek zorundasın
+  //!-----------Firma bilgilerinin silinmesi işlemi-----
   const deleteStock = async (path = "firms", id) => {
     dispatch(firmPending());
     try {
@@ -62,13 +62,13 @@ const useStockRequest = () => {
     }
   };
 
-//!-----------------Yeni bir firma ekleme işlemi-----------
-  const createStock = async (path="firms" ,firminfo) => {
+  //!-----------------Yeni bir firma ekleme işlemi-----------
+  const createStock = async (path = "firms", firminfo) => {
     dispatch(firmPending());
     try {
-      await axiosToken.post(`/${path}`,firminfo);
-     toastSuccessNotify(`${path} added successfully`)
-      getStock(path); 
+      await axiosToken.post(`/${path}`, firminfo);
+      toastSuccessNotify(`${path} added successfully`);
+      getStock(path);
       // console.log(data);
     } catch (error) {
       dispatch(firmRegister());
@@ -77,12 +77,12 @@ const useStockRequest = () => {
     }
   };
   //!-----------Firma bilgilerinin güncellenmesi işlemi-----
-  const putStock = async (path="firms",id ,firminfo) => {
+  const putStock = async (path = "firms", id, firminfo) => {
     dispatch(firmPending());
     try {
-      await axiosToken.put(`/${path}/${id}`,firminfo);
-     toastSuccessNotify(`${path} updated successfully`)
-      getStock(path); 
+      await axiosToken.put(`/${path}/${id}`, firminfo);
+      toastSuccessNotify(`${path} updated successfully`);
+      getStock(path);
       // console.log(data);
     } catch (error) {
       dispatch(firmRegister());
@@ -91,55 +91,9 @@ const useStockRequest = () => {
     }
   };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // const removeFirm = async (id) => {
-  //   dispatch(firmPending());
-  //   try {
-  //     const { data } = await axiosToken.delete(`/firms/${id}`);
-  //     dispatch(removeFirmAction(id)); //data?
-  //   } catch (error) {
-  //     dispatch(firmRegister());
-  //     console.log(error);
-  //   }
-  // };
-
-  // return { getStock, removeFirm,deleteStock };
-  return { getStock, deleteStock,createStock,putStock };
+  return { getStock, deleteStock, createStock, putStock };
 };
 
 export default useStockRequest;
 
 // içerisinde hook kullanacağımız için costom hook şeklinde çağırıyoruz.
-
-
-// 
-// const updateData = async (endpoint, datas, id) => {
-//   //? 3 durum için dispatch yayını adına firmSlice a ihtiyacımız var
-//   dispatch(fetchStart()); //* pending
-//   try {
-//     await axiosToken.patch(
-//       `/${endpoint}/${id}`, datas
-//     ); //* güvenlikli istek kullanıyoruz. Firma oluşturacağımız için '/firms' ekliyoruz
-//     // console.log(data);
-//     // dispatch(getDataSuccess(data)); //* fullfilled
-//     toastSuccessNotify("Updated succesfully!");
-//     getDatas(endpoint); //? oluşturma işlemi başarılı olduktan sonra firmaları getiren fonksiyon
-//   } catch (error) {
-//     // console.log(error);
-//     dispatch(fetchFail()); //* rejected
-//     toastErrorNotify("Oops! there is something wrong for updating");
-//   }
-// };
