@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import ProductModal from "../component/product/ProductModal";
 import { useState } from "react";
 import PurchasesTable from "../component/purchase/PurchasesTable";
+import PurchusesModal from "../component/purchase/PurchusesModal";
 
 const Purchases = () => {
   const { getStock, stockData } = useStockRequest();
@@ -19,7 +20,7 @@ const Purchases = () => {
   };
 
   useEffect(() => {
-    getStock(" purchases");
+    getStock("purchases");
     
   }, []);
 
@@ -28,7 +29,7 @@ const Purchases = () => {
       <Button variant="contained" color="info" onClick={handleOpen}>
         New PURCHASE
       </Button>
-      {/* <ProductModal open={open} handleClose={handleClose} /> */}
+      <PurchusesModal open={open} handleClose={handleClose} />
 
       <Box
         display="flex"
