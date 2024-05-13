@@ -21,6 +21,21 @@ const style = {
 const BrandsModal = ({open,handleClose}) => {
 
   const { createStock, putStock } = useStockRequest();
+  const [infoBrand,setInfoBrand]=useState({name:"",image:""})
+//   console.log(infoBrand);
+  const handleBrand=(e)=>{
+   setInfoBrand({...infoBrand,[e.target.name]:e.target.value})
+  }
+  const handleSubmit=(e)=>{
+    e.preventDefault()
+    createStock("brands",infoBrand)
+    setInfoBrand({name:"",image:""})
+    handleClose()
+
+  }
+
+
+
   return (
     <Box>
       <Modal
@@ -29,13 +44,14 @@ const BrandsModal = ({open,handleClose}) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style} display="flex" flexDirection="column" gap="1rem">
+        <Box sx={style} display="flex" component={"form"}  onSubmit={handleSubmit} flexDirection="column" gap="1rem">
           <TextField
             id="outlined-basic"
             label="Brand Name*"
             name="name"
             type="text"
             variant="outlined"
+            onChange={handleBrand}
           />
 
           <TextField
@@ -44,6 +60,7 @@ const BrandsModal = ({open,handleClose}) => {
             variant="outlined"
             type="url"
             name="image"
+            onChange={handleBrand}
           />
           <Button type="submit" color="error" variant="contained">
             add Brands
