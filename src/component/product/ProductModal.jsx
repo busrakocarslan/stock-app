@@ -14,8 +14,8 @@ import { modalstyle } from "../../styles/globalStyles";
 import { useSelector } from "react-redux";
 import useStockRequest from "../../services/useStockRequest";
 
-const ProductModal = ({ open, handleClose, infoProduct, setInfoProduct }) => {
-  const { createStock } = useStockRequest();
+const ProductModal = ({ open, handleClose, infoProduct={}, setInfoProduct,handleStock }) => {
+  const { createStock,putStock } = useStockRequest();
   const { categories, brands } = useSelector((state) => state.firms);
 
   const handleChange = (e) => {
@@ -27,6 +27,7 @@ const ProductModal = ({ open, handleClose, infoProduct, setInfoProduct }) => {
 
     handleClose();
   };
+ 
   return (
     <Box>
       <Modal
@@ -86,8 +87,18 @@ const ProductModal = ({ open, handleClose, infoProduct, setInfoProduct }) => {
             value={infoProduct.name}
             onChange={handleChange}
           />
+          <TextField
+            label="stock*"
+            name="quantity"
+            id="quantity"
+            type="number"
+            variant="outlined"
+            value={infoProduct.quantity}
+            onChange={handleChange}
+           
+          />
 
-          <Button type="submit" color="error" variant="contained">
+          <Button type="submit" color="info" variant="contained">
             add product
           </Button>
         </Box>

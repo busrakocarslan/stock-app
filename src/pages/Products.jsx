@@ -5,25 +5,40 @@ import ProductTable from "../component/product/ProductTable";
 import { useSelector } from "react-redux";
 import ProductModal from "../component/product/ProductModal";
 import { useState } from "react";
+import { toastSuccessNotify, toastErrorNotify } from "../helper/ToastNotify";
 
 const Products = () => {
-  const { getStock, stockData } = useStockRequest();
-  const { products,categories,brands } = useSelector((state) => state.firms);
+  const { getStock, stockData, patchStock } = useStockRequest();
+  const { products, categories, brands } = useSelector((state) => state.firms);
+
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
-  const initialState = { categoryId: "", brandId: "", name: "" };
+  const initialState = {id:"", categoryId: "", brandId: "", name: "", stock: "" };
   const [infoProduct, setInfoProduct] = useState(initialState);
+  // const handleStock = async () => {
+  //   console.log("handlestock çalıştı");
+  //   const newQuantitiy = infoProduct._id; // asenkron olduğu için değere atadım
+  //   console.log(newQuantitiy);
+  //   const updateQuantity = setInfoProduct({
+  //     ...infoProduct,
+  //     quantity: newQuantitiy,
+  //   });
+  //   console.log(updateQuantity);
+
+  //   const deneme=patchStock("products", infoProduct._id, updateQuantity);
+  //   console.log(deneme);
+  //   console.log(infoProduct._id);
+  // };
   const handleClose = () => {
     setOpen(false);
-    setInfoProduct(initialState)
-    
+    setInfoProduct(initialState);
   };
 
   useEffect(() => {
     getStock("products");
-    getStock("categories");// modaldaki alan için 
-    getStock("brands");// modaldaki alan için
+    getStock("categories"); // modaldaki alan için
+    getStock("brands"); // modaldaki alan için
   }, []);
   return (
     <>
@@ -33,7 +48,13 @@ const Products = () => {
       <Button variant="contained" color="info" onClick={handleOpen}>
         New Product
       </Button>
-      <ProductModal open={open} handleClose={handleClose} infoProduct={infoProduct} setInfoProduct={setInfoProduct} />
+      <ProductModal
+        open={open}
+        handleClose={handleClose}
+        infoProduct={infoProduct}
+        setInfoProduct={setInfoProduct}
+        // handleStock={handleStock}
+      />
 
       <Box
         display="flex"
@@ -42,7 +63,8 @@ const Products = () => {
         alignItems="center"
         marginTop={5}
       >
-        <ProductTable />
+        <ProductTable  />
+        {/* //handleStock={handleStock} */}
         {/*map ile döndün başta içerideki eleman kadar tablo oluştu yukarıda useEffect ile çağırdığından dönmene gerek yok */}
       </Box>
     </>

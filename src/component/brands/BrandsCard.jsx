@@ -19,7 +19,6 @@ const BrandsCard = ({brand,handleClose,handleOpen,setInfoBrand}) => {
       setInfoBrand(brand)
       handleOpen()
       console.log(brand);
-
     }
     
   return (

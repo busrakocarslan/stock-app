@@ -9,18 +9,25 @@ import PurchasesTable from "../component/purchase/PurchasesTable";
 import PurchusesModal from "../component/purchase/PurchusesModal";
 
 const Purchases = () => {
-  const { getStock, stockData } = useStockRequest();
-  const { purchases } = useSelector((state) => state.firms);
+  const { getStock } = useStockRequest();
+  // const { purchases,brands,firms,category,products } = useSelector((state) => state.firms);
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
+  
+  const [infoPurchases, setInfoPurchases] = useState({firmId:"", productId: "", brandId: "",quantity: "" ,price:""});
+
   const handleClose = () => {
+    setInfoPurchases({firmId:"", productId: "", brandId: "",quantity: "" ,price:"",categories:""})
     setOpen(false);
-    // setInfoBrand({name:"",image:""})
   };
 
   useEffect(() => {
     getStock("purchases");
+    getStock("firms")
+    getStock("categories")
+    getStock("brands")
+    getStock("products")
     
   }, []);
 
@@ -29,7 +36,7 @@ const Purchases = () => {
       <Button variant="contained" color="info" onClick={handleOpen}>
         New PURCHASE
       </Button>
-      <PurchusesModal open={open} handleClose={handleClose} />
+      <PurchusesModal open={open} handleClose={handleClose}  infoPurchases={infoPurchases} setInfoPurchases={setInfoPurchases} />
 
       <Box
         display="flex"
@@ -38,7 +45,7 @@ const Purchases = () => {
         alignItems="center"
         marginTop={5}
       >
-        <PurchasesTable />
+        <PurchasesTable handleClose={handleClose}  infoPurchases={infoPurchases} setInfoPurchases={setInfoPurchases} handleOpen={handleOpen} />
         {/*map ile döndün başta içerideki eleman kadar tablo oluştu yukarıda useEffect ile çağırdığından dönmene gerek yok */}
       </Box>
     </>

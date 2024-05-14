@@ -7,10 +7,21 @@ import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
 import useStockRequest from "../../services/useStockRequest";
 import { useSelector } from "react-redux";
 
-const PurchasesTable = ({ _id }) => {
+const PurchasesTable = ({
+  handleOpen,
+  handleClose,
+  infoPurchases,
+  setInfoPurchases, }) => {
   const { purchases } = useSelector((state) => state.firms);
   const { deleteStock } = useStockRequest();
-  const handleEditPurchases=()=>{}
+  const handleEditPurchases=(purchases)=>{
+    handleOpen()
+    setInfoPurchases({
+      ...purchases,
+    
+    });
+    
+  }
   const getRowId = (row) => row._id;
   const columns = [
    
@@ -87,7 +98,7 @@ const PurchasesTable = ({ _id }) => {
               }}
             />
           }
-          onClick={() => deleteStock("products", props.id)} // getactios in içindeki tüm bilgilere props ile giriyoruz
+          onClick={() => deleteStock("purchases", props.id)} // getactios in içindeki tüm bilgilere props ile giriyoruz
           label="delete"
         />,
         <GridActionsCellItem
@@ -101,8 +112,9 @@ const PurchasesTable = ({ _id }) => {
               }}
             />
           }
-          onClick={handleEditPurchases} // getactios in içindeki tüm bilgilere props ile giriyoruz
-          label="delete"
+          onClick={()=>handleEditPurchases(props.row)} // getactios in içindeki tüm bilgilere props ile giriyoruz
+          
+          label="edit"
         />,
       ],
       width: 150,
@@ -124,7 +136,7 @@ const PurchasesTable = ({ _id }) => {
           },
         }}
         rows={purchases} //=>bu bilgi useSelector ile initialstate den geliyor
-        columns={columns}
+        columns={columns}// yukarıda biz oluşturuyoruz.
         initialState={{
           pagination: {
             paginationModel: {

@@ -16,7 +16,7 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  border: "3px solid #6D1B7B",
+  border: "2px solid #B26400",
   boxShadow: 24,
   p: 4,
 };
@@ -114,7 +114,7 @@ const FirmsModal = ({ handleClose, open, selectedFirmId }) => {
                   value={values.image}
                   onChange={handleChange}
                 />
-                <Button type="submit" color="info" variant="contained">
+                <Button type="submit" color="secondary" variant="contained">
                  {
                   selectedFirmId ? "UPDATE FIRM" : "ADD FIRM"
                  } 

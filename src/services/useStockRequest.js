@@ -92,8 +92,21 @@ const useStockRequest = () => {
       console.log(error);
     }
   };
+  const patchStock = async (path = "firms", id,firminfo) => {
+    dispatch(firmPending());
+    try {
+      await axiosToken.patch(`/${path}/${id}`,firminfo);
+      toastSuccessNotify(`${path} updated successfully`);
+      getStock(path);
+      // console.log(data);
+    } catch (error) {
+      dispatch(firmRegister());
+      toastErrorNotify("Oops! there is something wrong for updating");
+      console.log(error);
+    }
+  };
 
-  return { getStock, deleteStock, createStock, putStock };
+  return { getStock, deleteStock, createStock, putStock,patchStock };
 };
 
 export default useStockRequest;

@@ -7,7 +7,7 @@ import useStockRequest from "../../services/useStockRequest";
 import { useSelector } from "react-redux";
 import { tableHeader } from "../../styles/globalStyles";
 
-const ProductTable = ({ _id }) => {
+const ProductTable = ({ handleStock }) => {
   const { products } = useSelector((state) => state.firms);
   const { deleteStock } = useStockRequest();
   //!id sorunu için:
@@ -44,6 +44,7 @@ const ProductTable = ({ _id }) => {
       // headerAling:"center",
       width: 150,
       editable: true,
+      
     },
     //actions kısmında sadece buton render edilecek bu sebeple dökümantasyonda belirtildiği üzere rendercell adında ya da action bir fonk var onu kullanmamız gerek ya da valuegetter fonk var onu kullanman lazım. dökümandan bak.action daha kısa bu yüzden onunla yapıldı
     //*getactions fonksiyonu bizim o bulundğu alandaki verilere ulaşmamızı sağlıyor.
@@ -53,7 +54,7 @@ const ProductTable = ({ _id }) => {
       headerName: "Operations", // görünecek başlık
       getActions: (props) => [
         //  propsa alıştığım için props yazdım
-        
+
         <GridActionsCellItem
           icon={
             <DeleteOutlineTwoToneIcon
@@ -73,6 +74,7 @@ const ProductTable = ({ _id }) => {
       editable: true,
     },
   ];
+  
   return (
     <Box color="info.main" sx={{ height: 400, width: "100%" }}>
       <DataGrid
@@ -88,18 +90,20 @@ const ProductTable = ({ _id }) => {
         }}
         rows={products} //=>bu bilgi useSelector ile initialstate den geliyor
         columns={columns}
-        // initialState={{
-        //   pagination: {
-        //     paginationModel: {
-        //       pageSize: 5,
-        //     },
-        //   },
-        // }}
+        onCellEditStop={()=>handleStock()}
+        initialState={{
+          pagination: {
+            paginationModel: {
+              // pageSizeOptions ile birlikte kullandım yoksa aşağıdaki(98) ayarlamayı yapamadım
+              pageSize: 5,
+            },
+          },
+        }}
         pageSizeOptions={[2, 3, 5]} // her sayfada kaç satır gösterileceğini buradan ayarlıyorsun
         checkboxSelection
         disableRowSelectionOnClick
-        getRowId={getRowId}// buraya verildi yukarıdaki 13. satırdaki fonk
-        // slots={{toolbar:GridTollBar}} 
+        getRowId={getRowId} // buraya verildi yukarıdaki 13. satırdaki fonk
+        // slots={{toolbar:GridTollBar}}
         // headerClassName="tableHeader"
       />
     </Box>
