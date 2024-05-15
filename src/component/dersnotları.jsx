@@ -70,7 +70,8 @@
 //! --------------------------13/5/2024 beşinci gün ---------------------------
 //! ------------------------------------------------------------------
 
-
+//* MUi nin alert isminde bir komponneti bulunmakltadır.İcon konulabiliyor ve alertim türüne göre renkde değiştirilebiliyır.  içi dolu boş yapabiliyorsun. 
+//?Loading için de skelaton yapısı var mui nin 
 
 
 

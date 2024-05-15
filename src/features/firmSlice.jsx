@@ -17,6 +17,7 @@ const firmSlice = createSlice({
   reducers: {
     firmPending: (state) => {
       state.loading = true;
+      state.error = false
     },
     // firmSuccess: (state, { payload }) => {
     //   state.loading = false;
@@ -34,7 +35,7 @@ const firmSlice = createSlice({
       //*square bracket yöntemi ile ayayınca içindekileri bir değişken olarak kabul ediyor. 
       //! destruc edilmiş hali 
       state[path]=stockData
-      state.error=false
+      // state.error=false
       
      
     },

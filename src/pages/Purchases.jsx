@@ -5,10 +5,11 @@ import { useState } from "react";
 import PurchasesTable from "../component/purchase/PurchasesTable";
 import PurchusesModal from "../component/purchase/PurchusesModal";
 import { useSelector } from "react-redux";
+import TableSkeleton, { ErrorMessage, NoDataMessage } from "../component/DataFetchMessages";
 
 const Purchases = () => {
   const { getStock } = useStockRequest();
-  const { purchases,brands,firms,category,products } = useSelector((state) => state.firms);
+  const { error,loading,purchases } = useSelector((state) => state.firms);
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
@@ -18,29 +19,47 @@ const Purchases = () => {
     productId: "",
     quantity: "",
     price: "",
-  }
-  
+  };
+
   const [infoPurchases, setInfoPurchases] = useState(initialState);
 
   const handleClose = () => {
     setOpen(false);
-    setInfoPurchases(initialState)
+    setInfoPurchases(initialState);
   };
 
   useEffect(() => {
     getStock("purchases");
-    getStock("firms")// select içide gelmez burada çağırmazsak verileri    
-    getStock("brands")
-    getStock("products")
-    
+    getStock("firms"); // select içide gelmez burada çağırmazsak verileri
+    getStock("brands");
+    getStock("products");
   }, []);
 
   return (
     <>
-      <Button variant="contained" color="info" onClick={handleOpen}>
+      <Button variant="contained" color="info" onClick={handleOpen} disabled={error} sx={{marginBottom:5}}>
         New PURCHASE
       </Button>
-      <PurchusesModal open={open} handleClose={handleClose}  infoPurchases={infoPurchases} setInfoPurchases={setInfoPurchases} />
+
+      {error && !loading && <ErrorMessage />}
+      {loading && purchases.length>0 && <TableSkeleton/>}
+      {!loading && !purchases.length && <NoDataMessage />}
+      {!error && !loading && <PurchasesTable
+          handleClose={handleClose}
+          infoPurchases={infoPurchases}
+          setInfoPurchases={setInfoPurchases}
+          handleOpen={handleOpen}
+        />}
+        
+      
+
+
+      <PurchusesModal
+        open={open}
+        handleClose={handleClose}
+        infoPurchases={infoPurchases}
+        setInfoPurchases={setInfoPurchases}
+      />
 
       <Box
         display="flex"
@@ -49,7 +68,7 @@ const Purchases = () => {
         alignItems="center"
         marginTop={5}
       >
-        <PurchasesTable handleClose={handleClose}  infoPurchases={infoPurchases} setInfoPurchases={setInfoPurchases} handleOpen={handleOpen} />
+       
         {/*map ile döndün başta içerideki eleman kadar tablo oluştu yukarıda useEffect ile çağırdığından dönmene gerek yok */}
       </Box>
     </>
