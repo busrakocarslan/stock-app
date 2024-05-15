@@ -54,7 +54,7 @@ const Products = () => {
       {error && !loading && <ErrorMessage />}
       {loading && products.length > 0 && <TableSkeleton />}
       {!loading && !products.length && <NoDataMessage />}
-      {!error && !loading && <ProductTable  />}
+      {!error && !loading && products.length > 0 && <ProductTable  />}
 
 
 

@@ -6,18 +6,22 @@ import { Box, Button, Typography } from "@mui/material";
 import Modal from "../component/Modal";
 import FirmsModal from "../component/Modal";
 import loadingGif from "../assets/loading.gif";
+import {
+  CardSkeleton,
+  ErrorMessage,
+  NoDataMessage,
+} from "../component/DataFetchMessages";
 
 const Firms = () => {
-  const [open, setOpen] = useState(false);// lifting state up yapıldı çünkü kardeşler arası da bu bilgiye ihtiyaç duyulduğundan propla gönderildi parentten
+  const [open, setOpen] = useState(false); // lifting state up yapıldı çünkü kardeşler arası da bu bilgiye ihtiyaç duyulduğundan propla gönderildi parentten
   const handleOpen = () => setOpen(true);
-  const [selectedFirmId,setSelectedFirmId]=useState()// selectedFirmId, seçilen firmanın bilgilerini tutacak ,ilk değeri null olarak ayarlandı başlangıçta herhangi bir firma seçilmemesi için,put ile pst işlemi arasında eldeki tek fark id bilgisi olduğundna ona göre bir condition 
+  const [selectedFirmId, setSelectedFirmId] = useState(); // selectedFirmId, seçilen firmanın bilgilerini tutacak ,ilk değeri null olarak ayarlandı başlangıçta herhangi bir firma seçilmemesi için,put ile pst işlemi arasında eldeki tek fark id bilgisi olduğundna ona göre bir condition
   const handleClose = () => {
-    setOpen(false)
-    setSelectedFirmId(null)// add butonuna firmi seçtikten sonra tıkladığımda bilgileri silmesi için 
+    setOpen(false);
+    setSelectedFirmId(null); // add butonuna firmi seçtikten sonra tıkladığımda bilgileri silmesi için
+  };
 
-  }
- 
-console.log(selectedFirmId);
+  console.log(selectedFirmId);
   const { getStock, stockData } = useStockRequest();
   // const dispatch = useDispatch();
   const { firms, loading, error } = useSelector((state) => state.firms);
@@ -35,29 +39,48 @@ console.log(selectedFirmId);
       <Typography variant="h3" color="primary.main" mb={2}>
         Firms
       </Typography>
-      <Button color="secondary" variant="contained" onClick={handleOpen}>
+      <Button
+        color="secondary"
+        variant="contained"
+        onClick={handleOpen}
+        disabled={error}
+        sx={{ mb: 5 }}
+      >
         ADD fİRMS
       </Button>
-      <FirmsModal handleClose={handleClose} open={open} selectedFirmId={selectedFirmId} />
-      {loading && <img src={loadingGif} alt="Loading" />}
-      {error && <Typography variant="body1">Hay aksi, bir hata oluştu!</Typography>}
-      <Box
-        display="flex"
-        flexWrap="wrap"
-        justifyContent="space-between"
-        alignItems="center"
-        mt={5}
-      >
-        {firms?.map((firm) => (
-          <FirmsCard
-            key={firm._id}
-            firm={firm}
-           
-            setSelectedFirmId={setSelectedFirmId}            
-            handleOpen={handleOpen}
-          ></FirmsCard>
-        ))}
-      </Box>
+
+      {loading && !firms.length > 0 && <CardSkeleton />}
+      {error && !loading && <ErrorMessage />}
+
+      {!loading && !firms.length && <NoDataMessage />}
+      {!error && !loading && (
+        <Box
+          display="flex"
+          flexWrap="wrap"
+          justifyContent="space-between"
+          alignItems="center"
+          mt={5}
+        >
+          {firms?.map((firm) => (
+            <FirmsCard
+              key={firm._id}
+              firm={firm}
+              setSelectedFirmId={setSelectedFirmId}
+              handleOpen={handleOpen}
+            ></FirmsCard>
+          ))}
+        </Box>
+      )}
+
+      <FirmsModal
+        handleClose={handleClose}
+        open={open}
+        selectedFirmId={selectedFirmId}
+      />
+      {/* {loading && <img src={loadingGif} alt="Loading" />} */}
+      {/* {error && (
+        <Typography variant="body1">Hay aksi, bir hata oluştu!</Typography>
+      )} */}
     </Box>
   );
 };
