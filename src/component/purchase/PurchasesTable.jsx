@@ -34,7 +34,7 @@ const PurchasesTable = ({ handleOpen, setInfoPurchases }) => {
       width: 130,
       headerAlign: "center",
       align: "center",
-      valueGetter: (value, row) => row.createdAt?.replace(/:/, ","), // name direk category ıd de bulunmadığından valuegetter özelliği kullanıldı
+      valueGetter: (value, row) => new Date(row.createdAt).toLocaleString("en-US") // toLocaleString() yöntemi, tarih ve saatleri, para birimlerini, sayıları ve diğer değerleri belirli bir yerel biçime dönüştürmek için kullanıyor.en-us ABD, de-DE Almanya, tr-TR Türkiye gibi
     },
     {
       field: "firmId",
