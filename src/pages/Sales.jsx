@@ -1,5 +1,9 @@
+import { useSelector } from "react-redux";
 import SaleModal from "../component/sale/SaleModal";
 import SalesTable from "../component/sale/SalesTable";
+import useStockRequest from "../services/useStockRequest";
+import { useEffect, useState } from "react";
+import { Box, Button } from "@mui/material";
 
 const Sales = () => {
   const { getStock } = useStockRequest();
@@ -21,7 +25,7 @@ const Sales = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
-    setInfoPurchases(initialState);
+    setInfoSales(initialState);
   };
 
   useEffect(() => {
@@ -49,7 +53,7 @@ const Sales = () => {
         marginTop={5}
       >
         <SalesTable
-          handleClose={handleClose}
+          handleOpen={handleOpen}
           infoSales={infoSales}
           setInfoSales={setInfoSales}
         />
