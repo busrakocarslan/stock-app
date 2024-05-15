@@ -1,31 +1,35 @@
 import { Box, Button, Typography } from "@mui/material";
 import { useEffect } from "react";
 import useStockRequest from "../services/useStockRequest";
-import ProductTable from "../component/product/ProductTable";
-import { useSelector } from "react-redux";
-import ProductModal from "../component/product/ProductModal";
 import { useState } from "react";
 import PurchasesTable from "../component/purchase/PurchasesTable";
 import PurchusesModal from "../component/purchase/PurchusesModal";
+import { useSelector } from "react-redux";
 
 const Purchases = () => {
   const { getStock } = useStockRequest();
-  // const { purchases,brands,firms,category,products } = useSelector((state) => state.firms);
+  const { purchases,brands,firms,category,products } = useSelector((state) => state.firms);
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
+  const initialState = {
+    brandId: "",
+    firmId: "",
+    productId: "",
+    quantity: "",
+    price: "",
+  }
   
-  const [infoPurchases, setInfoPurchases] = useState({firmId:"", productId: "", brandId: "",quantity: "" ,price:""});
+  const [infoPurchases, setInfoPurchases] = useState(initialState);
 
   const handleClose = () => {
-    setInfoPurchases({firmId:"", productId: "", brandId: "",quantity: "" ,price:"",categories:""})
     setOpen(false);
+    setInfoPurchases(initialState)
   };
 
   useEffect(() => {
     getStock("purchases");
-    getStock("firms")
-    getStock("categories")
+    getStock("firms")    
     getStock("brands")
     getStock("products")
     
