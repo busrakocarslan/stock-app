@@ -79,7 +79,7 @@ const useStockRequest = () => {
     }
   };
   //!-----------Firma bilgilerinin güncellenmesi işlemi-----
-  const putStock = async (path = "firms",id, firminfo) => {
+  const putStock = async (path = "firms", id, firminfo) => {
     dispatch(firmPending());
     try {
       await axiosToken.put(`/${path}/${id}`, firminfo);

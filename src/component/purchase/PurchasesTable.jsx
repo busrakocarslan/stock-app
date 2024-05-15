@@ -11,7 +11,7 @@ const PurchasesTable = ({ handleOpen, setInfoPurchases }) => {
   const { purchases } = useSelector((state) => state.firms);
   const { deleteStock } = useStockRequest();
   const handleEditPurchases = (row) => {
-    const {
+    const {// yazmayınca değişiklik yapmıyor
       _id,
       firmId,
       brandId,

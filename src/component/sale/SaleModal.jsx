@@ -3,29 +3,31 @@ import React from 'react'
 import { modalstyle } from "../../styles/globalStyles";
 import {  useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import useStockRequest from '../../services/useStockRequest';
 
 
-const SaleModal = ({open,handleClose,infoSales}) => {
+const SaleModal = ({open,handleClose,infoSales,setInfoSales}) => {
     const navigate = useNavigate()
-  const { products, brands, firms} = useSelector(
+    const { createStock, putStock } = useStockRequest();
+  const { products, brands} = useSelector(
     (state) => state.firms
   );
-    const handleChange = (e) => {}
-    //     setInfoPurchases({
-    //       ...infoPurchases,
-    //       [e.target.name]: e.target.value,
-    //     });
-    //   };
+    const handleChange = (e) => {
+        setInfoSales({
+          ...infoSales,
+          [e.target.name]: e.target.value,
+        });
+      };
       
     
       const handleSubmit = (e) => {
-        // e.preventDefault();
-        // if (infoPurchases._id) {
-        //   putStock("purchases",infoPurchases._id,infoPurchases);
-        // } else {
-        //   createStock("purchases", infoPurchases);
-        // }
-        // handleClose();
+        e.preventDefault();
+        if (infoSales._id) {
+          putStock("sales",infoSales._id,infoSales);
+        } else {
+          createStock("sales", infoSales);
+        }
+        handleClose();
       };
   return (
     <Box>
@@ -54,7 +56,7 @@ const SaleModal = ({open,handleClose,infoSales}) => {
             value={infoSales?.brandId?._id || infoSales?.brandId }
             label="Brand"
             onChange={handleChange}
-            required
+            
           >
             <MenuItem onClick={() => navigate("/stock/brands")}>
                 Add New Brand
@@ -80,7 +82,7 @@ const SaleModal = ({open,handleClose,infoSales}) => {
             value={infoSales?.productId?._id || infoSales?.productId  }
             label="Product"
             onChange={handleChange}
-            required
+            
           >
           
               <MenuItem onClick={() => navigate("/stock/products")}>

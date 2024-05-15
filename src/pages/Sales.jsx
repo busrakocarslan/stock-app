@@ -15,7 +15,7 @@ const Sales = () => {
     productId: "",
     quantity: "",
     price: "",
-    amount: "",
+   
   };
 
   const [infoSales, setInfoSales] = useState(initialState);

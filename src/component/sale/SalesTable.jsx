@@ -1,6 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import { DataGrid, GridActionsCellItem, valueGetter } from "@mui/x-data-grid";
+import { DataGrid, GridActionsCellItem, GridToolbar, valueGetter } from "@mui/x-data-grid";
 import { type } from "@testing-library/user-event/dist/type";
 import DeleteOutlineTwoToneIcon from "@mui/icons-material/DeleteOutlineTwoTone";
 import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
@@ -11,13 +11,31 @@ const SalesTable = ({ handleOpen, setInfoSales }) => {
   const { sales } = useSelector((state) => state.firms);
   const { deleteStock } = useStockRequest();
   const handleEditSales = (row) => {
+    const {
+      _id,
+     
+      brandId,
+      productId,
+      quantity,
+      
+      price,
+    } = row;
+  
     handleOpen();
-    setInfoSales(row);
+    setInfoSales({
+      _id,
+     
+      brandId,
+      productId,
+      quantity,
+            price,
+    });
   };
+  
   const getRowId = (row) => row._id;
   const columns = [
     //!mui x data nın unique id zorunluluğu var, id bu projede "_id" olarak geldiğinden unique id ye ulaşamıyor. Dökümanda ayrıntısı var. bu sorunu aşmak için yıkarıdaki fonk yazıldı
-
+    { field: "_id", headerName: "#", Width: .1, flex: 1 },
     {
       field: "createdAt",
       headerName: "DATE",
@@ -141,6 +159,7 @@ const SalesTable = ({ handleOpen, setInfoSales }) => {
         checkboxSelection
         disableRowSelectionOnClick
         getRowId={getRowId} // buraya verildi yukarıdaki 13. satırdaki fonk
+        slots={{ toolbar: GridToolbar }}// table in üst kısmındaki eklentiler çıkıyor
         // headerClassName="tableHeader"
       />
     </Box>
