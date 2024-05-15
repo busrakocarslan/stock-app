@@ -43,7 +43,7 @@ const PurchasesTable = ({ handleOpen, setInfoPurchases }) => {
       align: "center",
       // sortable: false,// sıralama
       width: 130,
-      valueGetter: (value, row) => row.firmId?.name,
+      valueGetter: (value) => value.name,
     },
     {
       field: "brandId", // burada yazan be ile aynı olmalı ancak data da Brand ıd de değil bilgi BrandId nin içinde name içinde bu yüzden dökümanda da yazılı olan valuegetter fonksiyonunu kullanmalı.
@@ -52,7 +52,7 @@ const PurchasesTable = ({ handleOpen, setInfoPurchases }) => {
       width: 130,
       headerAlign: "center",
       align: "center",
-      valueGetter: (value, row) => row.brandId?.name, // name direk brand ıd de bulunmadığından valuegetter özelliği kullanıldı
+      valueGetter: (value) => value.name, // name direk brand ıd de bulunmadığından valuegetter özelliği kullanıldı
     },
     {
       field: "productId", // bura be ile uyumlu ise direk veriler geliyor.

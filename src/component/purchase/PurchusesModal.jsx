@@ -79,7 +79,7 @@ const PurchusesModal = ({
                 </MenuItem>
                 <hr />
                 {firms?.map((item) => (
-                  <MenuItem key={item._id} value={item._id}>
+                  <MenuItem key={item._id} value={item._id}>{/*value kısmı bizim seçtiğimizi be ye göndereceği için id gönderiyoruz çnkü BE bizden products post ederken id istiyor be bizden ne istiyorsa value kısmında onu gönderiyoruz */}
                     {item.name}
                   </MenuItem>
                 ))}

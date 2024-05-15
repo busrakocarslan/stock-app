@@ -53,7 +53,7 @@ const SalesTable = ({ handleOpen, setInfoSales }) => {
       width: 130,
       headerAlign: "center",
       align: "center",
-      valueGetter: (value, row) => row.brandId?.name, // name direk brand ıd de bulunmadığından valuegetter özelliği kullanıldı
+      valueGetter: (value) => value?.name, // name direk brand ıd de bulunmadığından valuegetter özelliği kullanıldı//! valugetter in value propu field kısmında yazedığımıza erişiyor o yüzden row a gerek kalmadan yazılabiliyor.
     },
     {
       field: "productId", // bura be ile uyumlu ise direk veriler geliyor.
@@ -61,7 +61,7 @@ const SalesTable = ({ handleOpen, setInfoSales }) => {
       width: 150,
       headerAlign: "center",
       align: "center",
-      valueGetter: (value, row) => row.productId?.name,
+      valueGetter: (value) => value?.name,
     },
 
     {

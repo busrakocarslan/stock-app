@@ -29,7 +29,7 @@ const Purchases = () => {
 
   useEffect(() => {
     getStock("purchases");
-    getStock("firms")    
+    getStock("firms")// select içide gelmez burada çağırmazsak verileri    
     getStock("brands")
     getStock("products")
     
