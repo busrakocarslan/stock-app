@@ -1,6 +1,6 @@
 // import React from 'react'
 import Box from "@mui/material/Box";
-import { DataGrid, GridActionsCellItem, valueGetter } from "@mui/x-data-grid";
+import { DataGrid, GridActionsCellItem, GridToolbar, valueGetter } from "@mui/x-data-grid";
 import { type } from "@testing-library/user-event/dist/type";
 import DeleteOutlineTwoToneIcon from "@mui/icons-material/DeleteOutlineTwoTone";
 import useStockRequest from "../../services/useStockRequest";
@@ -104,6 +104,7 @@ const ProductTable = ({ handleStock }) => {
         disableRowSelectionOnClick
         getRowId={getRowId} // buraya verildi yukarıdaki 13. satırdaki fonk
         // slots={{toolbar:GridTollBar}}
+        slots={{ toolbar: GridToolbar }}// table in üst kısmındaki eklentiler çıkıyor
         // headerClassName="tableHeader"
       />
     </Box>

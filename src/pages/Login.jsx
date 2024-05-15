@@ -135,9 +135,9 @@ const Login = () => {
           </Box>
         </Grid>
 
-        <Grid item xs={10} sm={7} md={6} mt={3} justifyContent>
+        <Grid item xs={10} sm={7} md={6} mt={3} justifyContent="center">
           <Container>
-            <img src={image} alt="img" width="400px" xs={{}} />
+            <img src={image} alt="img" width="400px"  />
           </Container>
         </Grid>
       </Grid>

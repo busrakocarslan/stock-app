@@ -39,7 +39,7 @@ const Brands = () => {
         ADD BRAND
       </Button>
 
-      {loading && !brands.length > 0 && <CardSkeleton />}
+      {loading && <CardSkeleton />}
       {error && !loading && <ErrorMessage />}
 
       {!loading && !brands.length && <NoDataMessage />}

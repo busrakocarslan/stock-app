@@ -49,7 +49,7 @@ const Firms = () => {
         ADD fİRMS
       </Button>
 
-      {loading && !firms.length > 0 && <CardSkeleton />}
+      {loading &&  <CardSkeleton />}
       {error && !loading && <ErrorMessage />}
 
       {!loading && !firms.length && <NoDataMessage />}

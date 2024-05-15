@@ -1,6 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import { DataGrid, GridActionsCellItem, valueGetter } from "@mui/x-data-grid";
+import { DataGrid, GridActionsCellItem, GridToolbar, valueGetter } from "@mui/x-data-grid";
 import { type } from "@testing-library/user-event/dist/type";
 import DeleteOutlineTwoToneIcon from "@mui/icons-material/DeleteOutlineTwoTone";
 import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
@@ -158,7 +158,8 @@ const PurchasesTable = ({ handleOpen, setInfoPurchases }) => {
         checkboxSelection
         disableRowSelectionOnClick
         getRowId={getRowId} // buraya verildi yukarıdaki 13. satırdaki fonk
-        // headerClassName="tableHeader"
+        // 
+        slots={{ toolbar: GridToolbar }}// table in üst kısmındaki eklentiler çıkıyorheaderClassName="tableHeader"
       />
     </Box>
   );
