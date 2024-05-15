@@ -4,10 +4,14 @@ import SalesTable from "../component/sale/SalesTable";
 import useStockRequest from "../services/useStockRequest";
 import { useEffect, useState } from "react";
 import { Box, Button } from "@mui/material";
+import TableSkeleton, {
+  ErrorMessage,
+  NoDataMessage,
+} from "../component/DataFetchMessages";
 
 const Sales = () => {
   const { getStock } = useStockRequest();
-  const { sales, brands, category, products } = useSelector(
+  const { sales, brands, category, products,loading,error } = useSelector(
     (state) => state.firms
   );
   const initialState = {
@@ -15,7 +19,6 @@ const Sales = () => {
     productId: "",
     quantity: "",
     price: "",
-   
   };
 
   const [infoSales, setInfoSales] = useState(initialState);
@@ -36,9 +39,20 @@ const Sales = () => {
 
   return (
     <div>
-      <Button variant="contained" color="info" onClick={handleOpen}>
+      <Button variant="contained" color="info" onClick={handleOpen} sx={{marginBottom:5}}>
         New SALE
       </Button>
+
+      {error && !loading && <ErrorMessage />}
+      {loading && sales.length > 0 && <TableSkeleton />}
+      {!loading && !sales.length && <NoDataMessage />}
+      {!error && !loading && (
+        <SalesTable
+          handleOpen={handleOpen}
+          infoSales={infoSales}
+          setInfoSales={setInfoSales}
+        />
+      )}
       <SaleModal
         open={open}
         handleClose={handleClose}
@@ -51,13 +65,7 @@ const Sales = () => {
         justifyContent="space-between"
         alignItems="center"
         marginTop={5}
-      >
-        <SalesTable
-          handleOpen={handleOpen}
-          infoSales={infoSales}
-          setInfoSales={setInfoSales}
-        />
-      </Box>
+      ></Box>
     </div>
   );
 };

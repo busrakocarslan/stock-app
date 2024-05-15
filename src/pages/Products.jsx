@@ -6,10 +6,12 @@ import { useSelector } from "react-redux";
 import ProductModal from "../component/product/ProductModal";
 import { useState } from "react";
 import { toastSuccessNotify, toastErrorNotify } from "../helper/ToastNotify";
+import TableSkeleton, { ErrorMessage, NoDataMessage } from "../component/DataFetchMessages";
+
 
 const Products = () => {
   const { getStock, stockData, patchStock } = useStockRequest();
-  const { products, categories, brands } = useSelector((state) => state.firms);
+  const { products,error,loading } = useSelector((state) => state.firms);
 
   const [open, setOpen] = useState(false);
 
@@ -45,9 +47,18 @@ const Products = () => {
       <Typography variant="h3" color="info.light" mb={2}>
         Products
       </Typography>
-      <Button variant="contained" color="info" onClick={handleOpen}>
+      <Button variant="contained" color="info" onClick={handleOpen} sx={{marginBottom:5}} >
         New Product
       </Button>
+
+      {error && !loading && <ErrorMessage />}
+      {loading && products.length > 0 && <TableSkeleton />}
+      {!loading && !products.length && <NoDataMessage />}
+      {!error && !loading && <ProductTable  />}
+
+
+
+
       <ProductModal
         open={open}
         handleClose={handleClose}
@@ -63,7 +74,7 @@ const Products = () => {
         alignItems="center"
         marginTop={5}
       >
-        <ProductTable  />
+       
         {/* //handleStock={handleStock} */}
         {/*map ile döndün başta içerideki eleman kadar tablo oluştu yukarıda useEffect ile çağırdığından dönmene gerek yok */}
       </Box>
