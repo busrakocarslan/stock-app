@@ -14,6 +14,7 @@ const authSlice = createSlice({
     fetchStart: (state) => {
       // pending işlemi için
       state.loading = true;
+      state.error=false
     },
     loginSuccess: (state, { payload }) => {
       state.loading = false;

@@ -44,7 +44,7 @@ const useStockRequest = () => {
       dispatch(getStockSuccess({ stockData, path })); // burada klasik payload yazıyoruz aslında ancak burada payloadın içinde 2 parametre olduğundan destruc edip yzıldı
       console.log(data);
     } catch (error) {
-      
+      toastErrorNotify("Oops! there is something wrong for adding");
       dispatch(firmRegister());
       console.log(error);
     }

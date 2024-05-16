@@ -43,10 +43,10 @@ const Sales = () => {
         New SALE
       </Button>
 
-      {error && !loading && <ErrorMessage />}
+      {/* {error && !loading && <ErrorMessage />} hata alınca komple tabloyu ildiğinden kaldırıldı */}
       {loading && sales.length > 0 && <TableSkeleton />}
       {!loading && !sales.length && <NoDataMessage />}
-      {!error && !loading && (
+      {!loading && (
         <SalesTable
           handleOpen={handleOpen}
           infoSales={infoSales}
