@@ -17,7 +17,7 @@ const KPICards = () => {
       id: 2,
       title: "Profit",
       icon: <AccountBalanceWalletIcon sx={{ fontSize: "2rem" }} />,
-      amont: dataProfit.toLocaleString("tr-TR"),
+      amont: "₺ "+ dataProfit.toLocaleString("tr-TR"),
       color: "secondary.main",
       bgColor: "primary.main",
     },
@@ -35,7 +35,7 @@ const KPICards = () => {
       {kpiData.map((data) => (
         <Paper
         key={data.id}
-        elevation={3}
+        elevation={24}
         sx={{
           display: "flex",
           width: 300,

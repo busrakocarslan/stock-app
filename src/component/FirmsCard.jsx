@@ -35,8 +35,9 @@ const FirmsCard = ({firm,handleOpen,open,selectedFirmId,setSelectedFirmId,setSel
         sx={{
           minWidth: 300,
           maxWidth:300,
-          height: "350px",
-          m: "5px",
+          minHeight: 450,
+          maxHeight: 450,
+          m: "1px",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-around",

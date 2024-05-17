@@ -57,9 +57,10 @@ const Firms = () => {
         <Box
           display="flex"
           flexWrap="wrap"
-          justifyContent="space-between"
+          justifyContent="center"
           alignItems="center"
-          mt={5}
+          mt={1}
+          gap={3}
         >
           {firms?.map((firm) => (
             <FirmsCard
