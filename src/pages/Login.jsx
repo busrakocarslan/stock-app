@@ -131,7 +131,11 @@ const Login = () => {
           </Formik>
 
           <Box sx={{ textAlign: "center", mt: 2 }}>
-            <Link to="/register">Do you have not an account?</Link>
+            <Link to="/register"> <Typography  sx={{
+                    color:"primary.main",
+                    transition:"all .2s ease-in",
+                    "&:hover": { color: "secondary.main" },
+                  }}>Do you have not an account?</Typography></Link>
           </Box>
         </Grid>
 

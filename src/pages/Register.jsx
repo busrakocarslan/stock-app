@@ -10,7 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import { object, string } from "yup";
 import { Formik, Form } from "formik";
-import  useApiRequest  from "../services/useApiRequest";
+import useApiRequest from "../services/useApiRequest";
 const Register = () => {
   const { register } = useApiRequest();
   const navigate = useNavigate();
@@ -37,12 +37,13 @@ const Register = () => {
     <Container maxWidth="lg">
       <Grid
         container
-        justifyContent="center"
+        justifyContent="flex-start"
         direction="row-reverse"
         rowSpacing={{ sm: 3 }}
         sx={{
-          height: "100vh",
+          minHeight: "100vh",
           p: 2,
+          
         }}
       >
         <Grid item xs={12}>
@@ -167,12 +168,33 @@ const Register = () => {
             )}
           </Formik>
           <Box sx={{ textAlign: "center", mt: 2 }}>
-            <Typography color="secondary">Do you have an account? <Link style={{color:"#303E46"}} to="/" >Login now</Link></Typography>
+            <Typography color="secondary">
+              Do you have an account?
+              <Link to="/" style={{ textDecoration: "none", color: "#303E46" }}>
+                <Typography
+                  sx={{
+                    color:"primary.main",
+                    transition:"all .1s ease-in-out",
+                    "&:hover": { textDecoration: "underline" },
+                  }}
+                >
+                  Login Now
+                </Typography>
+              </Link>
+            </Typography>
           </Box>
         </Grid>
-        <Grid  item xs={0} sm={7} md={6} mt={3} justifyContent="center" alignItems="center">
+        <Grid
+          item
+          xs={0}
+          sm={7}
+          md={6}
+          my={10}
+          justifyContent="center"
+          alignItems="center"
+        >
           <Container>
-          <img src={image} alt="img" width="400px"/>
+            <img src={image} alt="img" width="500px" />
           </Container>
         </Grid>
       </Grid>
