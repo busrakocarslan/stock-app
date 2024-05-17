@@ -167,7 +167,7 @@ const Register = () => {
             )}
           </Formik>
           <Box sx={{ textAlign: "center", mt: 2 }}>
-            <Typography color="secondary">Do you have an account? <Link to="/" >Login now</Link></Typography>
+            <Typography color="secondary">Do you have an account? <Link style={{color:"#303E46"}} to="/" >Login now</Link></Typography>
           </Box>
         </Grid>
         <Grid  item xs={0} sm={7} md={6} mt={3} justifyContent="center" alignItems="center">
