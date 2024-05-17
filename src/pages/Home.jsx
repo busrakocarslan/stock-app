@@ -1,12 +1,11 @@
 import { useEffect } from "react";
 import Charts from "../component/dasboard/Charts";
 import KPICards from "../component/dasboard/KPICards";
-import { getStockSuccess } from "../features/firmSlice";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import useStockRequest from "../services/useStockRequest";
 
 const Home = () => {
-  const { sales, purchases } = useSelector((state) => state.firms);
+  // const { sales, purchases } = useSelector((state) => state.firms);
   const { getStock } = useStockRequest();
   useEffect(() => {
     getStock("sales");

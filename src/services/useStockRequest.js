@@ -97,15 +97,16 @@ const useStockRequest = () => {
   //!-----------Verilere aynı anda ulaşmak için kurulan promiseAll işlemi-----
 
   const getProPurBraFirmStock = async () => {
-    dispatch(fetchStart())
+    dispatch(firmPending());
+    
     try {
-      const [pro, pur, bra, fir] = await Promise.all([
+      const [pro, pur, bra, fir] = await Promise.all([// array olarak yazıyoruz sırası öenmli! eg. pro producta denk geliyor dikkat et
         axiosToken("/products"),
         axiosToken("/purchases"),
         axiosToken("/brands"),
         axiosToken("/firms"),
       ])
-      const products = pro?.data?.data
+      const products = pro?.data?.data// içiçer dispatchin içinde yazmadığım için verilerde nested olduğu için burada atama yapıp aşağıya gönderdim.
       const purchases = pur?.data?.data
       const brands = bra?.data?.data
       const firms = fir?.data?.data

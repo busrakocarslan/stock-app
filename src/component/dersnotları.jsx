@@ -75,6 +75,14 @@
 //! KPI lar bir uygulamada kritip verileri gösteren kartlardır
 //?PROMİSE ALLL yapısı 
 // içerisinde attığımız isteklerin her birini aynı anda yapar biri hata dönerse tamamını hatayla dönderir. birden çok isteğe aynı anda ihtiyacımız olduğunda kullanılabilecek bir yapı.Birleştirici olarak kabul eder. isteklerini array olarak atıyorsun sonuçlarda array olarak geliyor. ardışık veriler yoksa bireysel atılabilir;ancak birbirine bağlı veriler varsa promiseall kullanılabilir. 
+//* bazı serverlar eşzamanlı istek sayısı çok olursa bunu saldırı zannedip ploklayabilşyor imiş, dikkat et.
+// reachats,goJs grafik çşzmek şçşn olan kütüphaneler
+
+
+
+
+
+
 // const getProPurBraFirmStock = async () => {
 //     dispatch(fetchStart())
 //     try {
