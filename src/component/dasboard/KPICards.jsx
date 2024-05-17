@@ -12,12 +12,12 @@ const KPICards = () => {
       title: "Sales",
       icon: <EuroIcon />,
       amont: "€12000",
-      color: deepPurple[700],
-      bgColor: "hotpink ",
+      color: "secondary.light",
+      bgColor: "primary.light",
     },
     {
       id: 2,
-      title: "Sales",
+      title: "Profit",
       icon: <CurrencyExchangeIcon />,
       amont: "€12000",
       color: "red",
@@ -25,7 +25,7 @@ const KPICards = () => {
     },
     {
       id: 1,
-      title: "Sales",
+      title: "Purchases",
       icon: <AddShoppingCartIcon />,
       amont: "€12000",
       color: "purple",
@@ -36,8 +36,13 @@ const KPICards = () => {
   return (
     <Stack justifyContent={"center"} alignItems={"center"} gap={2} flexWrap={"wrap"}>
       {kpiData.map((data) => (
-        <Paper key={data.id} elevation={3} sx={{display:"flex"}}>
-          <Avatar sx={{bgColor:" data.bgColor"}}>{data.icon}</Avatar>
+        <Paper key={data.id}  elevation={3} sx={{display:"flex"}}>
+          <Avatar sx={{
+              bgcolor: data.bgColor,
+              color: data.color,
+              width: 60,
+              height: 60,
+            }}>{data.icon}</Avatar>
           <Box>
             <Typography>{data.title}</Typography>
             <Typography> {data.amont}</Typography>
@@ -47,6 +52,7 @@ const KPICards = () => {
          
         </Paper>
       ))}
+        <DonutCard/>
     </Stack>
   );
 };

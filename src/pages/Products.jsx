@@ -51,7 +51,7 @@ const Products = () => {
         New Product
       </Button>
 
-      {error && !loading && <ErrorMessage />}
+      {/* {error && !loading && <ErrorMessage />} */}
       {loading && products.length > 0 && <TableSkeleton />}
       {!loading && !products.length && <NoDataMessage />}
       {!error && !loading && products.length > 0 && <ProductTable  />}

@@ -41,7 +41,7 @@ const Purchases = () => {
         New PURCHASE
       </Button>
 
-      {error && !loading && <ErrorMessage />}
+      {/* {error && !loading && <ErrorMessage />} */}
       {loading && purchases.length>0 && <TableSkeleton/>}
       {!loading && !purchases.length && <NoDataMessage />}
       {!error && !loading && <PurchasesTable

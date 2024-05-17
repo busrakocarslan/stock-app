@@ -50,7 +50,7 @@ const Firms = () => {
       </Button>
 
       {loading &&  <CardSkeleton />}
-      {error && !loading && <ErrorMessage />}
+      {/* {error && !loading && <ErrorMessage />} */}
 
       {!loading && !firms.length && <NoDataMessage />}
       {!error && !loading && (

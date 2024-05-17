@@ -1,8 +1,11 @@
 import React from 'react'
+import DonutCard from './DonutCard'
 
 const Charts = () => {
   return (
-    <div>Charts</div>
+    <div>
+    
+    </div>
   )
 }
 

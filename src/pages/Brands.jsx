@@ -40,7 +40,7 @@ const Brands = () => {
       </Button>
 
       {loading && <CardSkeleton />}
-      {error && !loading && <ErrorMessage />}
+      {/* {error && !loading && <ErrorMessage />} */}
 
       {!loading && !brands.length && <NoDataMessage />}
       {!error && !loading && (
@@ -74,23 +74,7 @@ const Brands = () => {
 
       {/* {error && <Typography variant="body1">Hay aksi, bir hata oluştu!</Typography>} */}
 
-      <Box
-        display="flex"
-        flexWrap="wrap"
-        justifyContent="space-between"
-        alignItems="center"
-        marginTop={5}
-      >
-        {brands?.map((brand) => (
-          <BrandsCard
-            key={brand._id}
-            brand={brand}
-            setInfoBrand={setInfoBrand}
-            handleClose={handleClose}
-            handleOpen={handleOpen}
-          ></BrandsCard>
-        ))}
-      </Box>
+      
     </Box>
   );
 };
