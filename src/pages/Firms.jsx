@@ -60,7 +60,7 @@ const Firms = () => {
           justifyContent="center"
           alignItems="center"
           mt={1}
-          gap={3}
+          gap={2}
         >
           {firms?.map((firm) => (
             <FirmsCard

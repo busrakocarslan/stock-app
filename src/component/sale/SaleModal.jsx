@@ -121,7 +121,7 @@ const SaleModal = ({open,handleClose,infoSales,setInfoSales}) => {
           required
         />
 
-        <Button type="submit" color="error" variant="contained">
+        <Button type="submit" color="info" variant="contained">
         {infoSales._id ? "Update" : "Add"} Sales
         </Button>
       </Box>

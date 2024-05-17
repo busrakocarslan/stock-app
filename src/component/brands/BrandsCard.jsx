@@ -27,7 +27,8 @@ const BrandsCard = ({brand,handleClose,handleOpen,setInfoBrand}) => {
         sx={{
           minWidth: 300,
           maxWidth:300,
-          height: "350px",
+          minHeight: "450px",
+          maxHeight: "450px",
           m: "5px",
           display: "flex",
           flexDirection: "column",

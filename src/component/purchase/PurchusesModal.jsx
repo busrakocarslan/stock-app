@@ -160,7 +160,7 @@ const PurchusesModal = ({
             required
           />
 
-          <Button type="submit" color="error" variant="contained">
+          <Button type="submit" color="info" variant="contained">
           {infoPurchases._id ? "Update" : "Add"} Purchase
           </Button>
         </Box>

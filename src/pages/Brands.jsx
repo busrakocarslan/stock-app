@@ -32,7 +32,7 @@ const Brands = () => {
       <Button
         color="error"
         variant="contained"
-        sx={{ mb: 5 }}
+        sx={{ mb: 1 }}
         disabled={error}
         onClick={handleOpen}
       >
@@ -47,9 +47,10 @@ const Brands = () => {
         <Box
           display="flex"
           flexWrap="wrap"
-          justifyContent="space-between"
+          justifyContent="center"
           alignItems="center"
           marginTop={5}
+          gap={2}
         >
           {brands?.map((brand) => (
             <BrandsCard
