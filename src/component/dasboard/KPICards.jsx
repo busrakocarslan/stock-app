@@ -1,58 +1,66 @@
 import { Avatar, Box, Paper, Stack, Typography } from "@mui/material";
 import React from "react";
 import EuroIcon from "@mui/icons-material/Euro";
-import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { deepPurple } from "@mui/material/colors";
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import DonutCard from "./DonutCard";
+import { useSelector } from "react-redux";
 
 const KPICards = () => {
+  const { sales, purchases } = useSelector((state) => state.firms);
+
+  const totalSales = sales?.reduce((acc, sale) => acc + sale.amount, 0);
+  const totalPurchases = purchases?.reduce((acc, purc) => acc + purc.amount, 0);
+  const dataProfit = totalSales - totalPurchases;
   const kpiData = [
-    {
-      id: 1,
-      title: "Sales",
-      icon: <EuroIcon />,
-      amont: "€12000",
-      color: "secondary.light",
-      bgColor: "primary.light",
-    },
     {
       id: 2,
       title: "Profit",
-      icon: <CurrencyExchangeIcon />,
-      amont: "€12000",
-      color: "red",
-      bgColor: "black ",
-    },
-    {
-      id: 1,
-      title: "Purchases",
-      icon: <AddShoppingCartIcon />,
-      amont: "€12000",
-      color: "purple",
-      bgColor: "pink ",
+      icon: <AccountBalanceWalletIcon sx={{ fontSize: "2rem" }} />,
+      amont: dataProfit.toLocaleString("tr-TR"),
+      color: "secondary.main",
+      bgColor: "primary.main",
     },
   ];
 
   return (
-    <Stack justifyContent={"center"} alignItems={"center"} gap={2} flexWrap={"wrap"}>
+    <Stack
+      justifyContent={"flex-start"}
+      alignItems={"center"}
+      gap={5}
+      flexWrap={"wrap"}
+      direction={"row"}
+      p={3}
+      >
       {kpiData.map((data) => (
-        <Paper key={data.id}  elevation={3} sx={{display:"flex"}}>
-          <Avatar sx={{
+        <Paper
+        key={data.id}
+        elevation={3}
+        sx={{
+          display: "flex",
+          width: 300,
+          justifyContent: "flex-start",
+          gap: 2,
+          p: 2,
+        }}
+        >
+          <Avatar
+            sx={{
               bgcolor: data.bgColor,
               color: data.color,
               width: 60,
               height: 60,
-            }}>{data.icon}</Avatar>
+            }}
+          >
+            {data.icon}
+          </Avatar>
           <Box>
-            <Typography>{data.title}</Typography>
-            <Typography> {data.amont}</Typography>
+            <Typography variant="button">{data.title}</Typography>
+            <Typography variant="h5"> {data.amont}</Typography>
           </Box>
-
-         
-         
         </Paper>
       ))}
-        <DonutCard/>
+      <DonutCard />
     </Stack>
   );
 };

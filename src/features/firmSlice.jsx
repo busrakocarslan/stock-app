@@ -39,6 +39,19 @@ const firmSlice = createSlice({
       
      
     },
+    getProPurBraFirmSuccess: (
+      state,
+      { payload: { products, purchases, firms, brands } }
+    ) => {
+      state.loading = false
+      state.products = products
+      state.purchases = purchases
+      state.brands = brands
+      state.firms = firms
+    },
+
+
+
     firmRegister: (state) => {
       state.loading = false;
       state.error = true;
@@ -70,7 +83,7 @@ const firmSlice = createSlice({
   },
 });
 
-export const { firmPending, firmRegister,getStockSuccess } =
+export const { firmPending, firmRegister,getStockSuccess,getProPurBraFirmSuccess } =
   firmSlice.actions;
 
 export default firmSlice.reducer;

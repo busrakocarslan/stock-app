@@ -2,72 +2,62 @@ import React, { useEffect } from "react";
 import { DonutChart } from "@tremor/react";
 import { useSelector } from "react-redux";
 import useStockRequest from "../../services/useStockRequest";
+import { Stack } from "@mui/material";
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 
 const DonutCard = () => {
-    const {sales,purchases}=useSelector(state=>state.firms)
-    const { getStock } = useStockRequest();
+  const { sales, purchases } = useSelector((state) => state.firms);
+  const { getStock } = useStockRequest();
+  const dataForCart = sales.map((item) => ({
+    // sales için
+    name: item.brandId.name,
+    value: item.amount,
+  }));
+  const dataForCartPurc = purchases.map((item) => ({
+    // purchases için
+    name: item.brandId.name,
+    value: item.amount,
+  }));
 
-
-
-    useEffect(() => {
-        getStock("sales");
-        getStock("brands");
-        getStock("purchases")
-        
-     
-    }, [getStock])
-    
-  const datahero = [
-    {
-      name: "Noche Holding AG",
-      value: 9800,
-    },
-    {
-      name: "Rain Drop AG",
-      value: 4567,
-    },
-    {
-      name: "Push Rail AG",
-      value: 3908,
-    },
-    {
-      name: "Flow Steal AG",
-      value: 2400,
-    },
-    {
-      name: "Tiny Loop Inc.",
-      value: 2174,
-    },
-    {
-      name: "Anton Resorts Holding",
-      value: 1398,
-    },
-  ];
-
-  const dataFormatter = (number) =>
-    `$ ${Intl.NumberFormat("us").format(number).toString()}`;
+  const dataFormatter = (
+    number // amount un yazım şeklini yaralyan func.
+  ) => `₺ ${Intl.NumberFormat("tr").format(number).toString()}`;
   return (
-    <div>
-      {" "}
-      <>
-        <div className="mx-auto space-y-12">
-          <div className="space-y-3">
-            <span className="text-center block font-mono text-tremor-default text-tremor-content dark:text-dark-tremor-content">
-              donut variant 1
-            </span>
-            <div className="flex justify-center">
-                {sales && 
-              <DonutChart
-                data={sales}
-                variant="donut"
-                valueFormatter={dataFormatter}
-                onValueChange={(v) => console.log(v)}
-              />}
-            </div>
-          </div>
+    <Stack
+      direction={"row"}
+      justifyContent={"flex-start"}
+      width={"50%"}
+      gap={5}
+    >
+      <div>
+        <span className="text-center block font-mono text-tremor-default text-tremor-content dark:text-dark-tremor-content">
+          SALES
+        </span>
+        <div className="flex justify-center">
+          <DonutChart
+            style={{ width: "140px", height: "140px" }}
+            data={dataForCart}
+            variant="donut"
+            valueFormatter={dataFormatter}
+            onValueChange={(v) => console.log(v)}
+          />
         </div>
-      </>
-    </div>
+      </div>
+      <div>
+        <span className="text-center block font-mono text-tremor-default text-tremor-content dark:text-dark-tremor-content">
+          PURCHASES
+        </span>
+        <div className="flex justify-center">
+          <DonutChart
+            style={{ width: "140px", height: "140px" }}
+            data={dataForCartPurc}
+            variant="donut"
+            valueFormatter={dataFormatter}
+            onValueChange={(v) => console.log(v)}
+          />
+        </div>
+      </div>
+    </Stack>
   );
 };
 

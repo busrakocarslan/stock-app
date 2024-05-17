@@ -4,6 +4,7 @@ import {
   firmRegister,
   firmPending,
   getStockSuccess,
+  getProPurBraFirmSuccess
 } from "../features/firmSlice";
 import { toastSuccessNotify, toastErrorNotify } from "../helper/ToastNotify";
 
@@ -93,21 +94,44 @@ const useStockRequest = () => {
       console.log(error);
     }
   };
-  const patchStock = async (path = "firms", id,firminfo) => {
-    dispatch(firmPending());
-    try {
-      await axiosToken.patch(`/${path}/${id}`,firminfo);
-      toastSuccessNotify(`${path} updated successfully`);
-      getStock(path);
-      // console.log(data);
-    } catch (error) {
-      dispatch(firmRegister());
-      toastErrorNotify("Oops! there is something wrong for updating");
-      console.log(error);
-    }
-  };
+  //!-----------Verilere aynı anda ulaşmak için kurulan promiseAll işlemi-----
 
-  return { getStock, deleteStock, createStock, putStock,patchStock };
+  const getProPurBraFirmStock = async () => {
+    dispatch(fetchStart())
+    try {
+      const [pro, pur, bra, fir] = await Promise.all([
+        axiosToken("/products"),
+        axiosToken("/purchases"),
+        axiosToken("/brands"),
+        axiosToken("/firms"),
+      ])
+      const products = pro?.data?.data
+      const purchases = pur?.data?.data
+      const brands = bra?.data?.data
+      const firms = fir?.data?.data
+
+      dispatch(getProPurBraFirmSuccess({ products, purchases, brands, firms }))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  
+  // const patchStock = async (path = "firms", id,firminfo) => {
+  //   dispatch(firmPending());
+  //   try {
+  //     await axiosToken.patch(`/${path}/${id}`,firminfo);
+  //     toastSuccessNotify(`${path} updated successfully`);
+  //     getStock(path);
+  //     // console.log(data);
+  //   } catch (error) {
+  //     dispatch(firmRegister());
+  //     toastErrorNotify("Oops! there is something wrong for updating");
+  //     console.log(error);
+  //   }
+  // };
+
+  return { getStock, deleteStock, createStock, putStock,getProPurBraFirmStock };
 };
 
 export default useStockRequest;

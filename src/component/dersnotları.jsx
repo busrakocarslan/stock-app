@@ -72,9 +72,39 @@
 
 //* MUi nin alert isminde bir komponneti bulunmakltadır.İcon konulabiliyor ve alertim türüne göre renkde değiştirilebiliyır.  içi dolu boş yapabiliyorsun. 
 //?Loading için de skelaton yapısı var mui nin 
+//! KPI lar bir uygulamada kritip verileri gösteren kartlardır
+//?PROMİSE ALLL yapısı 
+// içerisinde attığımız isteklerin her birini aynı anda yapar biri hata dönerse tamamını hatayla dönderir. birden çok isteğe aynı anda ihtiyacımız olduğunda kullanılabilecek bir yapı.Birleştirici olarak kabul eder. isteklerini array olarak atıyorsun sonuçlarda array olarak geliyor. ardışık veriler yoksa bireysel atılabilir;ancak birbirine bağlı veriler varsa promiseall kullanılabilir. 
+// const getProPurBraFirmStock = async () => {
+//     dispatch(fetchStart())
+//     try {
+//       const [pro, pur, bra, fir] = await Promise.all([
+//         axiosToken("/products"),
+//         axiosToken("/purchases"),
+//         axiosToken("/brands"),
+//         axiosToken("/firms"),
+//       ])
+//       const products = pro?.data?.data
+//       const purchases = pur?.data?.data
+//       const brands = bra?.data?.data
+//       const firms = fir?.data?.data
 
+//       dispatch(getProPurBraFirmSuccess({ products, purchases, brands, firms }))
+//     } catch (error) {
+//       console.log(error)
+//     }
+//   }
 
-
+//   getProPurBraFirmSuccess: (
+//     state,
+//     { payload: { products, purchases, firms, brands } }
+//   ) => {
+//     state.loading = false
+//     state.products = products
+//     state.purchases = purchases
+//     state.brands = brands
+//     state.firms = firms
+//   },
 
 
 
