@@ -79,22 +79,24 @@ const ProductModal = ({ open, handleClose, infoProduct={}, setInfoProduct,handle
             </Select>
           </FormControl>
           <TextField
-            label="name*"
+            label="name"
             name="name"
             id="name"
             type="text"
             variant="outlined"
             value={infoProduct.name}
             onChange={handleChange}
+            required
           />
           <TextField
-            label="stock*"
+            label="stock"
             name="quantity"
             id="quantity"
             type="number"
             variant="outlined"
             value={infoProduct.quantity}
             onChange={handleChange}
+            required
            
           />
 
