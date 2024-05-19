@@ -71,9 +71,19 @@ const ProductTable = ({ handleStock }) => {
         />,
       ],
       width: 150,
-      editable: true,
+      // editable: true,
     },
   ];
+  const handleCellEditStop = (params, event) => {
+     console.log(params.row);
+     console.log(event);
+    const updatedProduct = {
+      categoryId:params.row.categoryId,
+      brandId:params.row.brandID,
+      stock: event.target.value,
+    };
+    handleStock(updatedProduct);
+  };
   
   return (
     <Box color="info.main" sx={{ height: 400, width: "100%" }}>
@@ -90,7 +100,7 @@ const ProductTable = ({ handleStock }) => {
         }}
         rows={products} //=>bu bilgi useSelector ile initialstate den geliyor
         columns={columns}
-        onCellEditStop={()=>handleStock()}
+        onCellEditStop={handleCellEditStop}
         initialState={{
           pagination: {
             paginationModel: {
