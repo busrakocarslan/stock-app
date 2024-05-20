@@ -12,7 +12,7 @@ import TableSkeleton, {
 } from "../component/DataFetchMessages";
 
 const Products = () => {
-  const { getStock, patchStock } = useStockRequest();
+  const { getStock, patchStock,putStock } = useStockRequest();
   const { products, error, loading } = useSelector((state) => state.firms);
 
   const [open, setOpen] = useState(false);
@@ -26,20 +26,20 @@ const Products = () => {
     stock: "",
   };
   const [infoProduct, setInfoProduct] = useState(initialState);
-  const handleStock = async (params) => {
-    const updatedProduct = {
-      ...infoProduct,
-      stock: params.quantity // Bu şekilde doğru alanı güncellemeyi unutmayın
-    };
+  // const handleStock = async(params) => {
+  //   const productToUpdate = products.find(product => product._id === params.id);
+  //   const updatedProduct = {
+  //     ...productToUpdate,
+  //     stock: params.quantity // Bu şekilde doğru alanı güncellemeyi unutmayın
+  //   };
   
-    try {
-      await patchStock("products", params.id, updatedProduct);
-      getStock("products")
-      toastSuccessNotify("Stock updated successfully");
-    } catch (error) {
-      toastErrorNotify("Failed to update stock");
-    }
-  };
+  //   try {
+  //    await patchStock("products", params.id, updatedProduct);
+  //     // toastSuccessNotify("Stock updated successfully");
+  //   } catch (error) {
+  //     // toastErrorNotify("Failed to update stock");
+  //   }
+  // };
   const handleClose = () => {
     setOpen(false);
     setInfoProduct(initialState);
@@ -75,7 +75,7 @@ const Products = () => {
           alignItems="center"
           marginTop={5}
         >
-          <ProductTable handleStock={handleStock} />
+          <ProductTable  /> 
 
           {/* //handleStock={handleStock} */}
           {/*map ile döndün başta içerideki eleman kadar tablo oluştu yukarıda useEffect ile çağırdığından dönmene gerek yok */}
@@ -87,7 +87,7 @@ const Products = () => {
         handleClose={handleClose}
         infoProduct={infoProduct}
         setInfoProduct={setInfoProduct}
-        handleStock={handleStock}
+        // handleStock={handleStock}
       />
     </>
   );

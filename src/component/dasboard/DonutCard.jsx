@@ -10,12 +10,12 @@ const DonutCard = () => {
   const { getStock } = useStockRequest();
   const dataForCart = sales.map((item) => ({
     // sales için
-    name: item.brandId.name,
+    name: item.brandId?.name,
     value: item.amount,
   }));
   const dataForCartPurc = purchases.map((item) => ({
     // purchases için
-    name: item.brandId.name,
+    name: item.brandId?.name,
     value: item.amount,
   }));
 

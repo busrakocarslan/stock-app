@@ -74,16 +74,26 @@ const ProductTable = ({ handleStock }) => {
       // editable: true,
     },
   ];
-  const handleCellEditStop = (params, event) => {
-     console.log(params.row);
-     console.log(event);
-    const updatedProduct = {
-      categoryId:params.row.categoryId,
-      brandId:params.row.brandID,
-      stock: event.target.value,
-    };
-    handleStock(updatedProduct);
-  };
+//   const handleCellEditStop = async (params,e) => {
+//     const { id, field } = params;
+//     if (field === 'quantity') {
+//         const updatedProduct = {
+//             id: id,
+//             stock: e.target.value,
+//         };
+//         await handleStock(updatedProduct);
+//     }
+// };
+// const handleProcessRowUpdate = (newRow, oldRow) => {
+//   if (newRow.quantity !== oldRow.quantity) {
+//     const updatedProduct = {
+//       id: newRow._id,
+//       quantity: newRow.quantity,
+//     };
+//     handleStock(updatedProduct);
+//   }
+//   return newRow;
+// };
   
   return (
     <Box color="info.main" sx={{ height: 400, width: "100%" }}>
@@ -100,7 +110,8 @@ const ProductTable = ({ handleStock }) => {
         }}
         rows={products} //=>bu bilgi useSelector ile initialstate den geliyor
         columns={columns}
-        onCellEditStop={handleCellEditStop}
+        // processRowUpdate={handleProcessRowUpdate}       
+        // onCellEditStop={handleCellEditStop}
         initialState={{
           pagination: {
             paginationModel: {
