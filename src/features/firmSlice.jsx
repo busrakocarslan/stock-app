@@ -49,6 +49,12 @@ const firmSlice = createSlice({
       state.brands = brands
       state.firms = firms
     },
+    // patchStockSuccess: (state, { payload: { id, updatedProduct } }) => {
+    //   state.loading = false;
+    //   state.products = state.products.map((product) =>
+    //     product._id === id ? { ...product, ...updatedProduct } : product
+    //   );
+    // },
 
 
 
